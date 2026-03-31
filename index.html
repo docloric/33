@@ -462,6 +462,16 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
 .search-input:focus { outline:none; border-color:var(--blue); }
 .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:16px; color:var(--muted); pointer-events:none; }
 
+/* ── DATALIST / SELECT fix ── */
+select.form-input option { background: var(--surface); color: var(--text); }
+input.form-input::placeholder { color: var(--muted); }
+datalist { background: var(--surface); color: var(--text); }
+/* Force dark text in inputs on all browsers */
+.form-input { color: #1a1a1a !important; background: #f8f9fa !important; }
+.form-input:focus { background: #ffffff !important; }
+[data-theme="dark"] .form-input { color: #f0f0f0 !important; background: #2a2a2a !important; }
+[data-theme="dark"] .form-input:focus { background: #333 !important; }
+
 /* ── RESPONSIVE ── */
 @media (min-width:600px) {
   .tab-bar { top:0; bottom:auto; border-top:none; border-bottom:.5px solid var(--border); }
@@ -495,27 +505,138 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
       </div>
       <div class="form-group">
         <label class="form-label">Scuola di Specializzazione</label>
-        <input class="form-input" id="ob-school" type="text" placeholder="es. Medicina del Lavoro" autocomplete="off" list="school-list"/>
+        <input class="form-input" id="ob-school" type="text" oninput="onSchoolChange()" onchange="onSchoolChange()" placeholder="es. Medicina del Lavoro" autocomplete="off" list="school-list"/>
         <datalist id="school-list">
-          <option value="Anestesia e Rianimazione"/><option value="Cardiologia"/>
-          <option value="Chirurgia Generale"/><option value="Dermatologia"/>
-          <option value="Ematologia"/><option value="Endocrinologia"/>
-          <option value="Gastroenterologia"/><option value="Geriatria"/>
-          <option value="Ginecologia e Ostetricia"/><option value="Igiene e Medicina Preventiva"/>
-          <option value="Malattie Infettive"/><option value="Medicina del Lavoro"/>
-          <option value="Medicina d'Emergenza-Urgenza"/><option value="Medicina Interna"/>
-          <option value="Medicina Legale"/><option value="Nefrologia"/>
-          <option value="Neurologia"/><option value="Neuropsichiatria Infantile"/>
-          <option value="Oftalmologia"/><option value="Oncologia Medica"/>
-          <option value="Ortopedia e Traumatologia"/><option value="Otorinolaringoiatria"/>
-          <option value="Patologia Clinica"/><option value="Pediatria"/>
-          <option value="Psichiatria"/><option value="Radiodiagnostica"/>
-          <option value="Reumatologia"/><option value="Urologia"/>
+          <option value="Allergologia ed Immunologia Clinica"/>
+          <option value="Anatomia Patologica"/>
+          <option value="Anestesia, Rianimazione, Terapia Intensiva e del Dolore"/>
+          <option value="Biochimica Clinica"/>
+          <option value="Cardiochirurgia"/>
+          <option value="Cardiologia"/>
+          <option value="Chirurgia Generale"/>
+          <option value="Chirurgia Maxillo-Facciale"/>
+          <option value="Chirurgia Pediatrica"/>
+          <option value="Chirurgia Plastica, Ricostruttiva ed Estetica"/>
+          <option value="Chirurgia Toracica"/>
+          <option value="Chirurgia Vascolare"/>
+          <option value="Dermatologia e Venerologia"/>
+          <option value="Ematologia"/>
+          <option value="Endocrinologia e Malattie del Metabolismo"/>
+          <option value="Farmacologia e Tossicologia Clinica"/>
+          <option value="Gastroenterologia"/>
+          <option value="Genetica Medica"/>
+          <option value="Geriatria"/>
+          <option value="Ginecologia e Ostetricia"/>
+          <option value="Igiene e Medicina Preventiva"/>
+          <option value="Malattie dell'Apparato Respiratorio"/>
+          <option value="Malattie Infettive e Tropicali"/>
+          <option value="Medicina del Lavoro"/>
+          <option value="Medicina d'Emergenza-Urgenza"/>
+          <option value="Medicina Fisica e Riabilitativa"/>
+          <option value="Medicina Interna"/>
+          <option value="Medicina Legale"/>
+          <option value="Medicina Nucleare"/>
+          <option value="Medicina Sportiva"/>
+          <option value="Microbiologia e Virologia"/>
+          <option value="Nefrologia"/>
+          <option value="Neurochirurgia"/>
+          <option value="Neurologia"/>
+          <option value="Neuropsichiatria Infantile"/>
+          <option value="Neuropsicologia"/>
+          <option value="Neuroscience"/>
+          <option value="Oftalmologia"/>
+          <option value="Oncologia Medica"/>
+          <option value="Ortopedia e Traumatologia"/>
+          <option value="Otorinolaringoiatria"/>
+          <option value="Patologia Clinica e Biochimica Clinica"/>
+          <option value="Pediatria"/>
+          <option value="Psichiatria"/>
+          <option value="Psicologia Clinica"/>
+          <option value="Radiodiagnostica"/>
+          <option value="Radioterapia"/>
+          <option value="Reumatologia"/>
+          <option value="Scienza dell'Alimentazione e Dietetica"/>
+          <option value="Urologia"/>
+          <option value="Corso di Formazione Specifica in Medicina Generale (CFSMG)"/>
         </datalist>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="ob-uni-group">
         <label class="form-label">Università</label>
-        <input class="form-input" id="ob-uni" type="text" placeholder="es. Università di Bologna" autocomplete="organization"/>
+        <input class="form-input" id="ob-uni" type="text" placeholder="Inizia a digitare l'università…" autocomplete="off" list="uni-list" oninput="onUniInput()"/>
+        <datalist id="uni-list">
+          <option value="Università degli Studi di Bari Aldo Moro"/>
+          <option value="Università degli Studi di Bologna"/>
+          <option value="Università degli Studi di Brescia"/>
+          <option value="Università degli Studi di Cagliari"/>
+          <option value="Università degli Studi della Campania Luigi Vanvitelli"/>
+          <option value="Università degli Studi di Catania"/>
+          <option value="Università degli Studi di Chieti-Pescara G. d'Annunzio"/>
+          <option value="Università degli Studi di Ferrara"/>
+          <option value="Università degli Studi di Firenze"/>
+          <option value="Università degli Studi di Foggia"/>
+          <option value="Università degli Studi di Genova"/>
+          <option value="Università degli Studi dell'Insubria"/>
+          <option value="Università degli Studi dell'Aquila"/>
+          <option value="Università degli Studi di Messina"/>
+          <option value="Università degli Studi di Milano"/>
+          <option value="Università degli Studi di Milano-Bicocca"/>
+          <option value="Università degli Studi di Modena e Reggio Emilia"/>
+          <option value="Università degli Studi di Napoli Federico II"/>
+          <option value="Università degli Studi di Padova"/>
+          <option value="Università degli Studi di Palermo"/>
+          <option value="Università degli Studi di Parma"/>
+          <option value="Università degli Studi di Pavia"/>
+          <option value="Università degli Studi di Perugia"/>
+          <option value="Università degli Studi di Pisa"/>
+          <option value="Università degli Studi di Roma La Sapienza"/>
+          <option value="Università degli Studi di Roma Tor Vergata"/>
+          <option value="Università degli Studi di Roma Tre"/>
+          <option value="Università Campus Bio-Medico di Roma"/>
+          <option value="Università Cattolica del Sacro Cuore (Roma)"/>
+          <option value="Università degli Studi di Salerno"/>
+          <option value="Università degli Studi di Sassari"/>
+          <option value="Università degli Studi di Siena"/>
+          <option value="Università degli Studi di Torino"/>
+          <option value="Università degli Studi di Trieste"/>
+          <option value="Università degli Studi di Udine"/>
+          <option value="Università degli Studi di Venezia Ca' Foscari"/>
+          <option value="Università degli Studi di Verona"/>
+          <option value="Università Vita-Salute San Raffaele (Milano)"/>
+          <option value="Università degli Studi Magna Graecia di Catanzaro"/>
+          <option value="Università degli Studi di Reggio Calabria"/>
+          <option value="Università degli Studi del Piemonte Orientale"/>
+          <option value="Università degli Studi di Napoli Parthenope"/>
+          <option value="Università degli Studi Suor Orsola Benincasa"/>
+          <option value="Università LUM Giuseppe Degennaro"/>
+          <option value="Università degli Studi di Cassino"/>
+          <option value="Università degli Studi Internazionali di Roma (UNINT)"/>
+        </datalist>
+      </div>
+      <div class="form-group" id="ob-region-group" style="display:none">
+        <label class="form-label">Regione CFSMG</label>
+        <select class="form-input" id="ob-region">
+          <option value="">Seleziona regione…</option>
+              <option value="Abruzzo">Abruzzo</option>
+              <option value="Basilicata">Basilicata</option>
+              <option value="Calabria">Calabria</option>
+              <option value="Campania">Campania</option>
+              <option value="Emilia-Romagna">Emilia-Romagna</option>
+              <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+              <option value="Lazio">Lazio</option>
+              <option value="Liguria">Liguria</option>
+              <option value="Lombardia">Lombardia</option>
+              <option value="Marche">Marche</option>
+              <option value="Molise">Molise</option>
+              <option value="Piemonte">Piemonte</option>
+              <option value="Puglia">Puglia</option>
+              <option value="Sardegna">Sardegna</option>
+              <option value="Sicilia">Sicilia</option>
+              <option value="Toscana">Toscana</option>
+              <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+              <option value="Umbria">Umbria</option>
+              <option value="Valle d'Aosta">Valle d'Aosta</option>
+              <option value="Veneto">Veneto</option>
+        </select>
       </div>
     </div>
     <div class="ob-section">
@@ -539,7 +660,21 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
       </div>
       <div class="form-group">
         <label class="form-label">Inizio specializzazione</label>
-        <input class="form-input" id="ob-start" type="month" value="2024-11"/>
+        <div style="display:flex;gap:8px">
+          <select class="form-input" id="ob-start-day" style="flex:1">
+            <option value="">Giorno</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+          </select>
+          <select class="form-input" id="ob-start-month" style="flex:1.5">
+            <option value="">Mese</option>
+            <option value="01">Gennaio</option><option value="02">Febbraio</option><option value="03">Marzo</option>
+            <option value="04">Aprile</option><option value="05">Maggio</option><option value="06">Giugno</option>
+            <option value="07">Luglio</option><option value="08">Agosto</option><option value="09">Settembre</option>
+            <option value="10" selected>Ottobre</option><option value="11">Novembre</option><option value="12">Dicembre</option>
+          </select>
+          <select class="form-input" id="ob-start-year" style="flex:1.2">
+            <option value="">Anno</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024"selected>2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">Ore mensili richieste</label>
@@ -560,7 +695,9 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
   <button class="tab-item"        id="tab-diario"   onclick="showTab('diario')"><span class="ti-icon">📖</span>Diario</button>
   <button class="tab-item"        id="tab-scadenze" onclick="showTab('scadenze')"><span class="ti-icon">⏰</span>Scadenze</button>
   <button class="tab-item"        id="tab-studio"   onclick="showTab('studio')"><span class="ti-icon">📚</span>Studio</button>
-  <button class="tab-item"        id="tab-profilo"  onclick="showTab('profilo')"><span class="ti-icon">👤</span>Profilo</button>
+  <button class="tab-item"        id="tab-struttura" onclick="showTab('struttura')"><span class="ti-icon">🏥</span>Struttura</button>
+  <button class="tab-item"        id="tab-calc"      onclick="showTab('calc')"><span class="ti-icon">🧮</span>Calcola</button>
+  <button class="tab-item"        id="tab-profilo"   onclick="showTab('profilo')"><span class="ti-icon">👤</span>Profilo</button>
 </nav>
 
 <!-- ══════════════════════════════════════
@@ -836,6 +973,99 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════════
+     PAGE: STRUTTURA
+══════════════════════════════════════ -->
+<div class="page" id="page-struttura">
+  <div class="page-hd">
+    <div class="hd-top">
+      <h1>Struttura</h1>
+      <button class="btn btn-primary btn-sm" onclick="saveStruttura()">Salva</button>
+    </div>
+  </div>
+  <div class="content">
+    <!-- Segreteria / Ufficio specializzazioni -->
+    <div class="set-section">
+      <div class="set-label">Segreteria Scuola di Specializzazione</div>
+      <div class="group-list">
+        <div style="padding:12px 16px">
+          <div class="form-group"><label class="form-label">Responsabile / Riferimento</label><input class="form-input" id="st-resp" type="text" placeholder="es. Prof. Rossi" autocomplete="off"/></div>
+          <div class="form-group"><label class="form-label">Telefono</label><input class="form-input" id="st-tel" type="tel" placeholder="es. 051 2143000"/></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="st-email" type="email" placeholder="es. segreteria@unibo.it"/></div>
+          <div class="form-group"><label class="form-label">PEC</label><input class="form-input" id="st-pec" type="email" placeholder="es. segreteria@pec.unibo.it"/></div>
+          <div class="form-group" style="margin-bottom:0"><label class="form-label">Indirizzo</label><input class="form-input" id="st-addr" type="text" placeholder="es. Via Massarenti 9, Bologna"/></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reparto principale -->
+    <div class="set-section">
+      <div class="set-label">Reparto principale</div>
+      <div class="group-list">
+        <div style="padding:12px 16px">
+          <div class="form-group"><label class="form-label">Nome reparto</label><input class="form-input" id="st-rep-nome" type="text" placeholder="es. U.O. Medicina del Lavoro"/></div>
+          <div class="form-group"><label class="form-label">Telefono reparto</label><input class="form-input" id="st-rep-tel" type="tel" placeholder="es. 051 2143100"/></div>
+          <div class="form-group"><label class="form-label">Indirizzo</label><input class="form-input" id="st-rep-addr" type="text" placeholder="es. Pad. 11, Policlinico S.Orsola, Bologna"/></div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Localizzazione su mappa</label>
+            <input class="form-input" id="st-rep-maps" type="text" placeholder="Indirizzo completo per aprire la mappa"/>
+            <button class="btn btn-secondary btn-sm" onclick="openMaps('st-rep-maps')" style="margin-top:6px;width:100%">📍 Apri su Maps</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tutor -->
+    <div class="set-section">
+      <div class="set-label">Tutor di riferimento</div>
+      <div class="group-list">
+        <div style="padding:12px 16px">
+          <div class="form-group"><label class="form-label">Nome e Cognome</label><input class="form-input" id="st-tutor-nome" type="text" placeholder="es. Prof.ssa Maria Bianchi"/></div>
+          <div class="form-group"><label class="form-label">Telefono</label><input class="form-input" id="st-tutor-tel" type="tel"/></div>
+          <div class="form-group" style="margin-bottom:0"><label class="form-label">Email</label><input class="form-input" id="st-tutor-email" type="email"/></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poli distaccati -->
+    <div class="set-section">
+      <div class="set-label">Poli distaccati</div>
+      <div id="poliList"></div>
+      <button class="btn btn-secondary btn-full" onclick="addPolo()" style="margin-bottom:12px">+ Aggiungi polo distaccato</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CALCOLATORI
+══════════════════════════════════════ -->
+<div class="page" id="page-calc">
+  <div class="page-hd">
+    <div class="hd-top"><h1>Calcolatori</h1></div>
+    <!-- Category filter -->
+    <div style="padding:8px 12px;overflow-x:auto;white-space:nowrap;display:flex;gap:6px;border-top:.5px solid var(--border2)">
+      <button class="calc-cat-btn active" onclick="filterCalc('all')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--blue);color:#fff;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">Tutti</button>
+      <button class="calc-cat-btn" onclick="filterCalc('cardio')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">❤️ Cardio</button>
+      <button class="calc-cat-btn" onclick="filterCalc('nefro')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">🫘 Nefro</button>
+      <button class="calc-cat-btn" onclick="filterCalc('epato')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">🟤 Epato</button>
+      <button class="calc-cat-btn" onclick="filterCalc('pneumo')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">🫁 Pneumo</button>
+      <button class="calc-cat-btn" onclick="filterCalc('neuro')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">🧠 Neuro</button>
+      <button class="calc-cat-btn" onclick="filterCalc('general')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">🩺 Generale</button>
+      <button class="calc-cat-btn" onclick="filterCalc('farmaco')" style="padding:6px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">💊 Farmaco</button>
+    </div>
+  </div>
+  <div class="content">
+    <div id="calcList"></div>
+  </div>
+</div>
+
+<!-- SHEET: CALCOLATORE -->
+<div class="sheet-overlay" id="calcSheet" hidden onclick="handleSheetOverlay(event,'calcSheet')">
+  <div class="sheet" id="calcSheetBody">
+    <div class="sheet-handle"></div>
+  </div>
+</div>
 <!-- ══════════════════════════════════════
      PAGE: PROFILO
 ══════════════════════════════════════ -->
@@ -854,7 +1084,59 @@ textarea.form-input { height:auto; resize:none; line-height:1.5; }
       <div class="group-list">
         <div style="padding:12px 16px">
           <div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="set-name" type="text" autocomplete="name"/></div>
-          <div class="form-group"><label class="form-label">Scuola di Specializzazione</label><input class="form-input" id="set-school" type="text" list="school-list2"/><datalist id="school-list2"></datalist></div>
+          <div class="form-group"><label class="form-label">Scuola di Specializzazione</label><input class="form-input" id="set-school" type="text" list="school-list2"/><datalist id="school-list2">
+          <option value="Allergologia ed Immunologia Clinica"/>
+          <option value="Anatomia Patologica"/>
+          <option value="Anestesia, Rianimazione, Terapia Intensiva e del Dolore"/>
+          <option value="Biochimica Clinica"/>
+          <option value="Cardiochirurgia"/>
+          <option value="Cardiologia"/>
+          <option value="Chirurgia Generale"/>
+          <option value="Chirurgia Maxillo-Facciale"/>
+          <option value="Chirurgia Pediatrica"/>
+          <option value="Chirurgia Plastica, Ricostruttiva ed Estetica"/>
+          <option value="Chirurgia Toracica"/>
+          <option value="Chirurgia Vascolare"/>
+          <option value="Dermatologia e Venerologia"/>
+          <option value="Ematologia"/>
+          <option value="Endocrinologia e Malattie del Metabolismo"/>
+          <option value="Farmacologia e Tossicologia Clinica"/>
+          <option value="Gastroenterologia"/>
+          <option value="Genetica Medica"/>
+          <option value="Geriatria"/>
+          <option value="Ginecologia e Ostetricia"/>
+          <option value="Igiene e Medicina Preventiva"/>
+          <option value="Malattie dell'Apparato Respiratorio"/>
+          <option value="Malattie Infettive e Tropicali"/>
+          <option value="Medicina del Lavoro"/>
+          <option value="Medicina d'Emergenza-Urgenza"/>
+          <option value="Medicina Fisica e Riabilitativa"/>
+          <option value="Medicina Interna"/>
+          <option value="Medicina Legale"/>
+          <option value="Medicina Nucleare"/>
+          <option value="Medicina Sportiva"/>
+          <option value="Microbiologia e Virologia"/>
+          <option value="Nefrologia"/>
+          <option value="Neurochirurgia"/>
+          <option value="Neurologia"/>
+          <option value="Neuropsichiatria Infantile"/>
+          <option value="Neuropsicologia"/>
+          <option value="Neuroscience"/>
+          <option value="Oftalmologia"/>
+          <option value="Oncologia Medica"/>
+          <option value="Ortopedia e Traumatologia"/>
+          <option value="Otorinolaringoiatria"/>
+          <option value="Patologia Clinica e Biochimica Clinica"/>
+          <option value="Pediatria"/>
+          <option value="Psichiatria"/>
+          <option value="Psicologia Clinica"/>
+          <option value="Radiodiagnostica"/>
+          <option value="Radioterapia"/>
+          <option value="Reumatologia"/>
+          <option value="Scienza dell'Alimentazione e Dietetica"/>
+          <option value="Urologia"/>
+          <option value="Corso di Formazione Specifica in Medicina Generale (CFSMG)"/>
+        </datalist></div>
           <div class="form-group" style="margin-bottom:0"><label class="form-label">Università</label><input class="form-input" id="set-uni" type="text"/></div>
         </div>
       </div>
@@ -1193,18 +1475,45 @@ async function init(){
 // ONBOARDING
 // ════════════════════════════════════════════════════
 async function saveOnboarding(){
-  const name=document.getElementById('ob-name').value.trim();
-  const school=document.getElementById('ob-school').value.trim();
-  if(!name||!school){alert('Inserisci nome e scuola di specializzazione');return;}
-  CFG={name,school,uni:document.getElementById('ob-uni').value.trim(),year:parseInt(document.getElementById('ob-year').value),dur:parseInt(document.getElementById('ob-dur').value),start:document.getElementById('ob-start').value,hours:parseInt(document.getElementById('ob-hours').value)||152};
-  await saveCFG();
-  document.getElementById('onboarding').hidden=true;
-  populateProfile();
-  buildYearPanels();
-  await renderAll();
-  renderDiary();
-  renderDeadlines();
-  renderStudy();
+  try {
+    const name=document.getElementById('ob-name').value.trim();
+    const school=document.getElementById('ob-school').value.trim();
+    if(!name||!school){alert('Inserisci nome e scuola di specializzazione');return;}
+    // Build start date from three selects
+    const sd=document.getElementById('ob-start-day').value;
+    const sm=document.getElementById('ob-start-month').value;
+    const sy=document.getElementById('ob-start-year').value;
+    const startStr = (sy&&sm) ? `${sy}-${sm}` : '2024-11';
+    const isCFSMG = school.includes('CFSMG') || school.toLowerCase().includes('medicina generale');
+    const region = isCFSMG ? (document.getElementById('ob-region').value||'') : '';
+    const uni = isCFSMG ? (region ? `Regione ${region}` : '') : document.getElementById('ob-uni').value.trim();
+    // Auto-fill duration based on school
+    const schoolDurations = {
+      'Anestesia': 5,'Cardiochirurgia': 5,'Chirurgia Generale': 5,'Chirurgia Maxillo': 5,
+      'Chirurgia Pediatrica': 5,'Chirurgia Plastica': 5,'Chirurgia Toracica': 5,'Chirurgia Vascolare': 5,
+      'Neurochirurgia': 5,'Ortopedia': 5,'Urologia': 5,'CFSMG': 3,'medicina generale': 3
+    };
+    let autoDur = 4;
+    for (const [k,v] of Object.entries(schoolDurations)) {
+      if (school.toLowerCase().includes(k.toLowerCase())) { autoDur = v; break; }
+    }
+    const durEl = document.getElementById('ob-dur');
+    const dur = parseInt(durEl.value) || autoDur;
+    CFG={name, school, uni, region, year:parseInt(document.getElementById('ob-year').value)||1,
+      dur, start:startStr, hours:parseInt(document.getElementById('ob-hours').value)||152,
+      isCFSMG};
+    await saveCFG();
+    document.getElementById('onboarding').hidden=true;
+    populateProfile();
+    buildYearPanels();
+    await renderAll();
+    renderDiary();
+    renderDeadlines();
+    renderStudy();
+  } catch(err) {
+    console.error('saveOnboarding error:', err);
+    alert('Errore: ' + err.message);
+  }
 }
 
 // ════════════════════════════════════════════════════
@@ -1556,6 +1865,444 @@ win.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><
 // AVVIO
 // ════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded',init);
+
+// ══ ONBOARDING HELPERS ══
+function onSchoolChange(){
+  const school = document.getElementById('ob-school').value;
+  const isCFSMG = school.includes('CFSMG') || school.toLowerCase().includes('medicina generale');
+  const regionGrp = document.getElementById('ob-region-group');
+  const uniGrp    = document.getElementById('ob-uni-group');
+  if (regionGrp) regionGrp.style.display = isCFSMG ? '' : 'none';
+  if (uniGrp)    uniGrp.style.display    = isCFSMG ? 'none' : '';
+  // Auto-fill duration
+  const schoolDurations = [
+    ['Anestesia',5],['Cardiochirurgia',5],['Chirurgia Generale',5],
+    ['Chirurgia Maxillo',5],['Chirurgia Pediatrica',5],['Chirurgia Plastica',5],
+    ['Chirurgia Toracica',5],['Chirurgia Vascolare',5],['Neurochirurgia',5],
+    ['Ortopedia',5],['Urologia',5],['CFSMG',3],['medicina generale',3]
+  ];
+  const durEl = document.getElementById('ob-dur');
+  if (durEl) {
+    let d=4;
+    for (const [k,v] of schoolDurations){ if(school.toLowerCase().includes(k.toLowerCase())){d=v;break;} }
+    durEl.value = d;
+  }
+  // Auto-fill hours
+  const hoursEl = document.getElementById('ob-hours');
+  if (hoursEl) hoursEl.value = isCFSMG ? 100 : 152;
+}
+function onUniInput(){ /* autocomplete handled by datalist */ }
+
+// ══ DATE FORMAT helpers: display as gg-mm-aaaa ══
+function formatDateDisplay(isoStr){
+  if (!isoStr) return '—';
+  if (isoStr.length === 10) { // YYYY-MM-DD
+    const [y,m,d] = isoStr.split('-');
+    return `${d}-${m}-${y}`;
+  }
+  if (isoStr.length === 7) { // YYYY-MM
+    const [y,m] = isoStr.split('-');
+    return `${m}-${y}`;
+  }
+  return isoStr;
+}
+
+// ════════════════════════════════════════════════════
+// STRUTTURA
+// ════════════════════════════════════════════════════
+async function loadStruttura(){return(await loadStore('app33_struttura'))||{};}
+async function saveStrutturaStore(o){await saveStore('app33_struttura',o);}
+async function loadPoli(){return(await loadStore('app33_poli'))||[];}
+async function savePoli(arr){await saveStore('app33_poli',arr);}
+
+async function populateStruttura(){
+  const s=await loadStruttura();
+  const fields=['st-resp','st-tel','st-email','st-pec','st-addr','st-rep-nome','st-rep-tel','st-rep-addr','st-rep-maps','st-tutor-nome','st-tutor-tel','st-tutor-email'];
+  fields.forEach(id=>{const el=document.getElementById(id);if(el)el.value=s[id]||'';});
+  await renderPoli();
+}
+
+async function saveStruttura(){
+  const fields=['st-resp','st-tel','st-email','st-pec','st-addr','st-rep-nome','st-rep-tel','st-rep-addr','st-rep-maps','st-tutor-nome','st-tutor-tel','st-tutor-email'];
+  const o={};fields.forEach(id=>{const el=document.getElementById(id);if(el)o[id]=el.value.trim();});
+  await saveStrutturaStore(o);
+  alert('Struttura salvata ✓');
+}
+
+function openMaps(fieldId){
+  const addr=document.getElementById(fieldId)?.value?.trim();
+  if(!addr){alert('Inserisci prima un indirizzo');return;}
+  window.open(`https://maps.google.com?q=${encodeURIComponent(addr)}`,'_blank');
+}
+
+async function renderPoli(){
+  const poli=await loadPoli();const list=document.getElementById('poliList');if(!list)return;list.innerHTML='';
+  if(!poli.length){list.innerHTML='<p style="font-size:13px;color:var(--muted);padding:0 4px 10px">Nessun polo distaccato aggiunto</p>';return;}
+  poli.forEach((p,i)=>{
+    const card=document.createElement('div');card.className='card';card.style.padding='12px 14px';
+    card.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><strong style="font-size:15px">${p.nome||'Polo '+( i+1)}</strong><button onclick="deletePolo(${i})" style="background:var(--red-light);color:var(--red);border:none;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer">Rimuovi</button></div><div style="font-size:13px;color:var(--muted)"><div>📞 ${p.tel||'—'}</div><div>📍 ${p.addr||'—'}</div><div>👤 Tutor: ${p.tutor||'—'}</div></div>${p.addr?`<button onclick="openMaps2('${p.addr.replace(/'/g,"\'")}')" style="margin-top:8px;background:var(--blue-light);color:var(--blue);border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;width:100%">📍 Apri su Maps</button>`:''}`;
+    list.appendChild(card);
+  });
+}
+function openMaps2(addr){window.open(`https://maps.google.com?q=${encodeURIComponent(addr)}`,'_blank');}
+
+function addPolo(){
+  const nome=prompt('Nome polo distaccato (es. Ospedale Bellaria):');
+  if(!nome)return;
+  const tel=prompt('Telefono polo:','');
+  const addr=prompt('Indirizzo polo:','');
+  const tutor=prompt('Tutor di riferimento:','');
+  loadPoli().then(poli=>{poli.push({nome,tel,addr,tutor});savePoli(poli).then(()=>renderPoli());});
+}
+async function deletePolo(i){const poli=await loadPoli();poli.splice(i,1);await savePoli(poli);renderPoli();}
+
+// ════════════════════════════════════════════════════
+// CALCOLATORI — 40 calcolatori medici
+// ════════════════════════════════════════════════════
+const CALCS = [
+  // ── CARDIO
+  {id:'cha2ds2',cat:'cardio',icon:'❤️',name:'CHA₂DS₂-VASc',desc:'Rischio tromboembolico in FA',
+    fields:[
+      {id:'chf',label:'Scompenso cardiaco',type:'check'},
+      {id:'htn',label:'Ipertensione',type:'check'},
+      {id:'age75',label:'Età ≥ 75 anni',type:'check'},
+      {id:'dm',label:'Diabete mellito',type:'check'},
+      {id:'stroke',label:'Ictus/TIA precedente',type:'check'},
+      {id:'vasc',label:'Vasculopatia (IMA, arteriopatia)',type:'check'},
+      {id:'age65',label:'Età 65–74 anni',type:'check'},
+      {id:'female',label:'Sesso femminile',type:'check'},
+    ],
+    calc:(f)=>{ const score=(f.chf?1:0)+(f.htn?1:0)+(f.age75?2:0)+(f.dm?1:0)+(f.stroke?2:0)+(f.vasc?1:0)+(f.age65?1:0)+(f.female?1:0); const risk=score===0?'Basso (0.2%)':score===1?'Basso-moderato (0.6%)':score===2?'Moderato (2.2%)':score===3?'Moderato-alto (3.2%)':score===4?'Alto (4%)':'Molto alto (>6%)'; return `Score: <strong>${score}</strong><br>Rischio annuo: ${risk}`; }
+  },
+  {id:'has_bled',cat:'cardio',icon:'🩸',name:'HAS-BLED',desc:'Rischio emorragico in TAO',
+    fields:[
+      {id:'htn2',label:'Ipertensione non controllata (PAS>160)',type:'check'},
+      {id:'renal',label:'Insufficienza renale (creatinina>2.3)',type:'check'},
+      {id:'liver',label:'Epatopatia (cirrosi o bilirubina>2x)',type:'check'},
+      {id:'stroke2',label:'Ictus precedente',type:'check'},
+      {id:'bleed',label:'Sanguinamento/predisposizione',type:'check'},
+      {id:'labile',label:'INR labile (TTR<60%)',type:'check'},
+      {id:'elderly',label:'Età >65 anni',type:'check'},
+      {id:'drugs',label:'Farmaci antiag./FANS',type:'check'},
+      {id:'alcohol',label:'Alcol (≥8 drink/settimana)',type:'check'},
+    ],
+    calc:(f)=>{ const s=(f.htn2?1:0)+(f.renal?1:0)+(f.liver?1:0)+(f.stroke2?1:0)+(f.bleed?1:0)+(f.labile?1:0)+(f.elderly?1:0)+(f.drugs?1:0)+(f.alcohol?1:0); const risk=s<=1?'Basso':s<=3?'Moderato':'Alto (rivalutare TAO)'; return `Score: <strong>${s}</strong><br>Rischio emorragico: ${risk}`; }
+  },
+  {id:'grace',cat:'cardio',icon:'💓',name:'TIMI Risk (NSTEMI)',desc:'Rischio a breve termine in NSTEMI',
+    fields:[
+      {id:'age_t',label:'Età ≥ 65 anni',type:'check'},
+      {id:'cad3',label:'≥3 fattori rischio CAD',type:'check'},
+      {id:'stenosis',label:'Stenosi coronarica nota ≥50%',type:'check'},
+      {id:'stdev',label:'Deviazione ST all'ECG',type:'check'},
+      {id:'angina2',label:'≥2 episodi anginosi nelle 24h',type:'check'},
+      {id:'asa',label:'Uso ASA nei 7 giorni precedenti',type:'check'},
+      {id:'marker',label:'Marcatori cardiaci elevati',type:'check'},
+    ],
+    calc:(f)=>{ const s=Object.values(f).filter(Boolean).length; const risk=s<=2?'Basso (4.7%)':s<=4?'Intermedio (13.2%)':'Alto (40.9%)'; return `Score: <strong>${s}/7</strong><br>Rischio eventi: ${risk}`; }
+  },
+  {id:'wells_dvt',cat:'cardio',icon:'🦵',name:'Wells DVT',desc:'Probabilità clinica di TVP',
+    fields:[
+      {id:'cancer',label:'Neoplasia attiva',type:'check'},
+      {id:'paralysis',label:'Paralisi/paresi/immobilizzazione arto',type:'check'},
+      {id:'bedridden',label:'Allettamento >3gg o chirurgia entro 4 sett.',type:'check'},
+      {id:'tenderness',label:'Dolorabilità lungo vene profonde',type:'check'},
+      {id:'swelling',label:'Gonfiore a tutto l'arto',type:'check'},
+      {id:'calf3',label:'Differenza polpaccio >3cm',type:'check'},
+      {id:'pitting',label:'Edema con fovea',type:'check'},
+      {id:'collateral',label:'Circolo collaterale superficiale',type:'check'},
+      {id:'alt_diag',label:'Diagnosi alternativa almeno probabile (-2 pt)',type:'check'},
+    ],
+    calc:(f)=>{ const s=(f.cancer?1:0)+(f.paralysis?1:0)+(f.bedridden?1:0)+(f.tenderness?1:0)+(f.swelling?1:0)+(f.calf3?1:0)+(f.pitting?1:0)+(f.collateral?1:0)+(f.alt_diag?-2:0); const risk=s<=0?'Bassa (3%)':s<=2?'Intermedia (17%)':'Alta (75%)'; return `Score: <strong>${s}</strong><br>Probabilità TVP: ${risk}`; }
+  },
+  {id:'wells_pe',cat:'cardio',icon:'🫁',name:'Wells EP',desc:'Probabilità clinica di embolia polmonare',
+    fields:[
+      {id:'dvt_sx',label:'Segni/sintomi clinici di TVP',type:'check'},
+      {id:'alt_dx',label:'EP più probabile di altra diagnosi',type:'check'},
+      {id:'hr100',label:'FC > 100 bpm',type:'check'},
+      {id:'immo',label:'Immobilità >3gg o chirurgia entro 4 sett.',type:'check'},
+      {id:'prev_dvt',label:'TVP o EP precedente',type:'check'},
+      {id:'emopt',label:'Emottisi',type:'check'},
+      {id:'neo',label:'Neoplasia (in trattamento negli ultimi 6 mesi)',type:'check'},
+    ],
+    calc:(f)=>{ const s=(f.dvt_sx?3:0)+(f.alt_dx?3:0)+(f.hr100?1.5:0)+(f.immo?1.5:0)+(f.prev_dvt?1.5:0)+(f.emopt?1:0)+(f.neo?1:0); const risk=s<=1?'Bassa (1.3%)':s<=6?'Intermedia (16.2%)':'Alta (37.5%)'; return `Score: <strong>${s}</strong><br>Probabilità EP: ${risk}`; }
+  },
+  // ── NEFRO
+  {id:'ckd_epi',cat:'nefro',icon:'🫘',name:'CKD-EPI eGFR',desc:'Filtrato glomerulare stimato',
+    fields:[
+      {id:'creat',label:'Creatinina sierica (mg/dL)',type:'number',placeholder:'es. 1.2'},
+      {id:'age_ck',label:'Età (anni)',type:'number',placeholder:'es. 55'},
+      {id:'female_ck',label:'Sesso femminile',type:'check'},
+    ],
+    calc:(f)=>{ const cr=parseFloat(f.creat)||1;const age=parseInt(f.age_ck)||50;const fem=!!f.female_ck; const k=fem?0.7:0.9;const a=fem?-0.241:-0.302; const gfr=142*Math.pow(Math.min(cr/k,1),a)*Math.pow(Math.max(cr/k,1),-1.2)*Math.pow(0.9938,age)*(fem?1.012:1); const stage=gfr>=90?'G1 (normale)':gfr>=60?'G2 (lieve)':gfr>=45?'G3a':gfr>=30?'G3b':gfr>=15?'G4':'G5 (insufficienza renale)'; return `eGFR: <strong>${Math.round(gfr)} mL/min/1.73m²</strong><br>Stadio CKD: ${stage}`; }
+  },
+  {id:'cockroft',cat:'nefro',icon:'💧',name:'Cockroft-Gault',desc:'Clearance creatinina stimata',
+    fields:[
+      {id:'creat_cg',label:'Creatinina sierica (mg/dL)',type:'number',placeholder:'es. 1.2'},
+      {id:'age_cg',label:'Età (anni)',type:'number',placeholder:'es. 55'},
+      {id:'peso_cg',label:'Peso corporeo (kg)',type:'number',placeholder:'es. 70'},
+      {id:'female_cg',label:'Sesso femminile',type:'check'},
+    ],
+    calc:(f)=>{ const cr=parseFloat(f.creat_cg)||1;const age=parseInt(f.age_cg)||50;const w=parseFloat(f.peso_cg)||70;const fem=!!f.female_cg; let cl=((140-age)*w)/(72*cr); if(fem)cl*=0.85; const interp=cl>=90?'Normale':cl>=60?'Lieve riduzione':cl>=30?'Moderata riduzione':cl>=15?'Grave riduzione':'Insufficienza renale terminale'; return `ClCr: <strong>${Math.round(cl)} mL/min</strong><br>Interpretazione: ${interp}`; }
+  },
+  {id:'urine_ag',cat:'nefro',icon:'🔬',name:'Anion Gap Urinario',desc:'Diagnosi acidosi tubulare renale',
+    fields:[
+      {id:'una',label:'Na urinario (mEq/L)',type:'number',placeholder:'es. 50'},
+      {id:'uk',label:'K urinario (mEq/L)',type:'number',placeholder:'es. 30'},
+      {id:'ucl',label:'Cl urinario (mEq/L)',type:'number',placeholder:'es. 60'},
+    ],
+    calc:(f)=>{ const ag=(parseFloat(f.una)||0)+(parseFloat(f.uk)||0)-(parseFloat(f.ucl)||0); const interp=ag<0?'Negativo (cause extrarenali di acidosi, es. diarrea)':'Positivo (acidosi tubulare renale o ipoaldosteronismo)'; return `Anion Gap U: <strong>${ag} mEq/L</strong><br>${interp}`; }
+  },
+  // ── EPATO/GASTRO
+  {id:'child_pugh',cat:'epato',icon:'🟤',name:'Child-Pugh',desc:'Severità della cirrosi epatica',
+    fields:[
+      {id:'bili',label:'Bilirubina totale',type:'select',options:['<2 mg/dL (1pt)','2-3 mg/dL (2pt)','>3 mg/dL (3pt)']},
+      {id:'alb',label:'Albumina sierica',type:'select',options:['>3.5 g/dL (1pt)','2.8-3.5 g/dL (2pt)','<2.8 g/dL (3pt)']},
+      {id:'pt',label:'PT (sec prolungato) / INR',type:'select',options:['<4s / INR<1.7 (1pt)','4-6s / INR 1.7-2.3 (2pt)','>6s / INR>2.3 (3pt)']},
+      {id:'ascite',label:'Ascite',type:'select',options:['Assente (1pt)','Lieve (2pt)','Moderata/severa (3pt)']},
+      {id:'encef',label:'Encefalopatia',type:'select',options:['Assente (1pt)','Grado I-II (2pt)','Grado III-IV (3pt)']},
+    ],
+    calc:(f)=>{ const score=['bili','alb','pt','ascite','encef'].reduce((s,k)=>s+(parseInt((f[k]||'1').match(/\d+pt/)?.[0])||1),0); const cls=score<=6?'A (sopravvivenza 1a: 100%)':score<=9?'B (sopravvivenza 1a: 81%)':'C (sopravvivenza 1a: 45%)'; return `Score: <strong>${score}</strong><br>Classe: <strong>${cls}</strong>`; }
+  },
+  {id:'meld',cat:'epato',icon:'📊',name:'MELD Score',desc:'Mortalità a 90 giorni nella cirrosi',
+    fields:[
+      {id:'bili_m',label:'Bilirubina totale (mg/dL)',type:'number',placeholder:'es. 2.0'},
+      {id:'inr_m',label:'INR',type:'number',placeholder:'es. 1.5'},
+      {id:'creat_m',label:'Creatinina (mg/dL)',type:'number',placeholder:'es. 1.2'},
+      {id:'na_m',label:'Sodio sierico (mEq/L)',type:'number',placeholder:'es. 136'},
+    ],
+    calc:(f)=>{ let b=Math.max(parseFloat(f.bili_m)||1,1);let i=Math.max(parseFloat(f.inr_m)||1,1);let c=Math.min(Math.max(parseFloat(f.creat_m)||1,1),4);let na=Math.min(Math.max(parseInt(f.na_m)||130,125),137);const meld=Math.round(3.78*Math.log(b)+11.2*Math.log(i)+9.57*Math.log(c)+6.43); const meldna=meld+1.32*(137-na)-(0.033*meld*(137-na)); const mort=meldna<10?'<1.9%':meldna<20?'6%':meldna<30?'19.6%':meldna<40?'52.6%':'>71.3%'; return `MELD: <strong>${meld}</strong> · MELD-Na: <strong>${Math.round(meldna)}</strong><br>Mortalità 90gg: ${mort}`; }
+  },
+  // ── PNEUMO
+  {id:'psi',cat:'pneumo',icon:'🫁',name:'PSI/PORT Score',desc:'Severità polmonite acquisita in comunità',
+    fields:[
+      {id:'age_p',label:'Età (anni)',type:'number',placeholder:'es. 65'},
+      {id:'fem_p',label:'Sesso femminile (-10 pt)',type:'check'},
+      {id:'nurs',label:'Ospite struttura protetta (+10)',type:'check'},
+      {id:'neopla',label:'Neoplasia (+30)',type:'check'},
+      {id:'liver_p',label:'Epatopatia (+20)',type:'check'},
+      {id:'chf_p',label:'Scompenso cardiaco (+10)',type:'check'},
+      {id:'cvd_p',label:'Malattia cerebrovascolare (+10)',type:'check'},
+      {id:'renal_p',label:'Nefropatia (+10)',type:'check'},
+      {id:'alt_ms',label:'Stato mentale alterato (+20)',type:'check'},
+      {id:'rr30',label:'FR ≥30 atti/min (+20)',type:'check'},
+      {id:'sbp90',label:'PAS <90 mmHg (+20)',type:'check'},
+      {id:'temp',label:'Temp <35°C o ≥40°C (+15)',type:'check'},
+      {id:'hr125',label:'FC ≥125 bpm (+10)',type:'check'},
+    ],
+    calc:(f)=>{ const age=parseInt(f.age_p)||50;const fem=!!f.fem_p;let s=age+(fem?-10:0)+(f.nurs?10:0)+(f.neopla?30:0)+(f.liver_p?20:0)+(f.chf_p?10:0)+(f.cvd_p?10:0)+(f.renal_p?10:0)+(f.alt_ms?20:0)+(f.rr30?20:0)+(f.sbp90?20:0)+(f.temp?15:0)+(f.hr125?10:0);const cls=s<=50?'I (mortalità 0.1%)':s<=70?'II (0.6%)':s<=90?'III (2.8%)':s<=130?'IV (8.2%)':'V (29.2%)'; return `Score: <strong>${s}</strong><br>Classe PSI: <strong>${cls}</strong>`; }
+  },
+  {id:'curb65',cat:'pneumo',icon:'🌡️',name:'CURB-65',desc:'Gravità polmonite — decisione ricovero',
+    fields:[
+      {id:'confusion',label:'Confusione (BUN→AMTS≤8)',type:'check'},
+      {id:'urea',label:'Urea >7 mmol/L (BUN >19 mg/dL)',type:'check'},
+      {id:'rr_c',label:'FR ≥30 atti/min',type:'check'},
+      {id:'bp_c',label:'PAS <90 o PAD ≤60 mmHg',type:'check'},
+      {id:'age65',label:'Età ≥65 anni',type:'check'},
+    ],
+    calc:(f)=>{ const s=Object.values(f).filter(Boolean).length; const rec=s<=1?'Domicilio (mortalità 1.5%)':s===2?'Supervisione/breve ricovero (9.2%)':'Ricovero urgente (22%)'; return `Score: <strong>${s}/5</strong><br>Raccomandazione: ${rec}`; }
+  },
+  // ── NEURO
+  {id:'nihss',cat:'neuro',icon:'🧠',name:'NIHSS semplificato',desc:'Gravità ictus ischemico',
+    fields:[
+      {id:'loc',label:'Livello di coscienza (0-3)',type:'select',options:['0 - Vigile','1 - Non vigile ma risvegliabile','2 - Coma superficiale','3 - Coma profondo']},
+      {id:'gaze',label:'Sguardo (0-2)',type:'select',options:['0 - Normale','1 - Paresi parziale','2 - Deviazione forzata']},
+      {id:'visual',label:'Campo visivo (0-3)',type:'select',options:['0 - Normale','1 - Emianopsia parziale','2 - Emianopsia completa','3 - Cecità bilaterale']},
+      {id:'facial',label:'Paresi facciale (0-3)',type:'select',options:['0 - Normale','1 - Lieve','2 - Parziale','3 - Completa']},
+      {id:'motor_arm',label:'Motilità arto sup. (0-4)',type:'select',options:['0 - Normale','1 - Deriva','2 - Vince gravità','3 - Non vince gravità','4 - Plegia']},
+      {id:'motor_leg',label:'Motilità arto inf. (0-4)',type:'select',options:['0 - Normale','1 - Deriva','2 - Vince gravità','3 - Non vince gravità','4 - Plegia']},
+      {id:'ataxia',label:'Atassia (0-2)',type:'select',options:['0 - Assente','1 - Un arto','2 - Due arti']},
+      {id:'sensory',label:'Sensibilità (0-2)',type:'select',options:['0 - Normale','1 - Lieve perdita','2 - Grave perdita']},
+      {id:'language',label:'Linguaggio (0-3)',type:'select',options:['0 - Normale','1 - Afasia lieve','2 - Afasia grave','3 - Mutismo/globale']},
+      {id:'dysarth',label:'Disartria (0-2)',type:'select',options:['0 - Normale','1 - Lieve','2 - Grave/anartria']},
+      {id:'neglect',label:'Estinzione/neglect (0-2)',type:'select',options:['0 - Normale','1 - Lieve','2 - Grave']},
+    ],
+    calc:(f)=>{ const s=['loc','gaze','visual','facial','motor_arm','motor_leg','ataxia','sensory','language','dysarth','neglect'].reduce((tot,k)=>tot+(parseInt((f[k]||'0').charAt(0))||0),0); const grav=s===0?'Nessun deficit':s<=4?'Lieve':s<=15?'Moderato':s<=20?'Moderato-grave':'Grave'; return `NIHSS: <strong>${s}</strong><br>Gravità: ${grav}`; }
+  },
+  {id:'gcs',cat:'neuro',icon:'👁️',name:'Glasgow Coma Scale',desc:'Livello di coscienza',
+    fields:[
+      {id:'eye',label:'Apertura occhi (E)',type:'select',options:['4 - Spontanea','3 - A comando verbale','2 - Al dolore','1 - Assente']},
+      {id:'verb',label:'Risposta verbale (V)',type:'select',options:['5 - Orientata','4 - Confusa','3 - Parole inappropriate','2 - Suoni incomprensibili','1 - Assente']},
+      {id:'motor2',label:'Risposta motoria (M)',type:'select',options:['6 - Obbedisce','5 - Localizza il dolore','4 - Retrae al dolore','3 - Flessione anomala','2 - Estensione anomala','1 - Assente']},
+    ],
+    calc:(f)=>{ const s=['eye','verb','motor2'].reduce((t,k)=>t+(parseInt((f[k]||'1').charAt(0))||1),0); const int2=s>=14?'Lieve (GCS 14-15)':s>=9?'Moderato (GCS 9-13)':'Grave (GCS ≤8, intubazione da considerare)'; return `GCS: <strong>${s}/15</strong><br>${int2}`; }
+  },
+  // ── GENERALE
+  {id:'bmi',cat:'general',icon:'⚖️',name:'BMI',desc:'Indice di massa corporea',
+    fields:[
+      {id:'peso',label:'Peso (kg)',type:'number',placeholder:'es. 70'},
+      {id:'altezza',label:'Altezza (cm)',type:'number',placeholder:'es. 175'},
+    ],
+    calc:(f)=>{ const p=parseFloat(f.peso)||70;const h=(parseFloat(f.altezza)||175)/100;const bmi=p/(h*h);const int2=bmi<18.5?'Sottopeso':bmi<25?'Normopeso':bmi<30?'Sovrappeso':bmi<35?'Obesità I':'Obesità II-III'; return `BMI: <strong>${bmi.toFixed(1)} kg/m²</strong><br>${int2}`; }
+  },
+  {id:'bsa',cat:'general',icon:'📐',name:'BSA (Mosteller)',desc:'Superficie corporea per dosaggio farmaci',
+    fields:[
+      {id:'peso_b',label:'Peso (kg)',type:'number',placeholder:'es. 70'},
+      {id:'alt_b',label:'Altezza (cm)',type:'number',placeholder:'es. 175'},
+    ],
+    calc:(f)=>{ const p=parseFloat(f.peso_b)||70;const h=parseFloat(f.alt_b)||175;const bsa=Math.sqrt((h*p)/3600);return `BSA: <strong>${bsa.toFixed(2)} m²</strong>`; }
+  },
+  {id:'sofa',cat:'general',icon:'🏥',name:'SOFA Score',desc:'Disfunzione d'organo in sepsi',
+    fields:[
+      {id:'pao2',label:'PaO₂/FiO₂',type:'select',options:['>400 (0pt)','301-400 (1pt)','201-300 (2pt)','101-200 ventilato (3pt)','≤100 ventilato (4pt)']},
+      {id:'plt',label:'Piastrine (×10³/μL)',type:'select',options:['>150 (0pt)','101-150 (1pt)','51-100 (2pt)','21-50 (3pt)','≤20 (4pt)']},
+      {id:'bili_s',label:'Bilirubina (mg/dL)',type:'select',options:['<1.2 (0pt)','1.2-1.9 (1pt)','2.0-5.9 (2pt)','6.0-11.9 (3pt)','≥12 (4pt)']},
+      {id:'cv',label:'Cardiovascolare',type:'select',options:['PAM≥70 (0pt)','PAM<70 (1pt)','Dopa≤5 o Dobu (2pt)','Dopa>5 o NA≤0.1 (3pt)','Dopa>15 o NA>0.1 (4pt)']},
+      {id:'gcs_s',label:'GCS',type:'select',options:['15 (0pt)','13-14 (1pt)','10-12 (2pt)','6-9 (3pt)','<6 (4pt)']},
+      {id:'creat_s',label:'Creatinina (mg/dL)',type:'select',options:['<1.2 (0pt)','1.2-1.9 (1pt)','2.0-3.4 (2pt)','3.5-4.9 o diuresi<500mL/d (3pt)','≥5 o diuresi<200mL/d (4pt)']},
+    ],
+    calc:(f)=>{ const s=['pao2','plt','bili_s','cv','gcs_s','creat_s'].reduce((t,k)=>t+(parseInt((f[k]||'0').match(/[0-9]pt/)?.[0])||0),0); const mort=s<7?'<10%':s<10?'15-20%':s<13?'40-50%':'50-60%'; return `SOFA: <strong>${s}/24</strong><br>Mortalità stimata: ${mort}`; }
+  },
+  {id:'qsofa',cat:'general',icon:'⚠️',name:'qSOFA',desc:'Screening rapido sepsi fuori dalla TI',
+    fields:[
+      {id:'rr22',label:'FR ≥22 atti/min',type:'check'},
+      {id:'cms',label:'Stato mentale alterato (GCS<15)',type:'check'},
+      {id:'sbp100',label:'PAS ≤100 mmHg',type:'check'},
+    ],
+    calc:(f)=>{ const s=Object.values(f).filter(Boolean).length; const risk=s<2?'Basso rischio (monitoraggio)':'Alto rischio sepsi (≥2 criteri → valutazione urgente)'; return `qSOFA: <strong>${s}/3</strong><br>${risk}`; }
+  },
+  {id:'news2',cat:'general',icon:'📋',name:'NEWS2',desc:'Early Warning Score deterioramento clinico',
+    fields:[
+      {id:'rr_n',label:'Frequenza respiratoria (atti/min)',type:'number',placeholder:'es. 18'},
+      {id:'spo2',label:'SpO₂ (%)',type:'number',placeholder:'es. 96'},
+      {id:'sbp_n',label:'Pressione arteriosa sistolica (mmHg)',type:'number',placeholder:'es. 120'},
+      {id:'hr_n',label:'Frequenza cardiaca (bpm)',type:'number',placeholder:'es. 80'},
+      {id:'temp_n',label:'Temperatura (°C)',type:'number',placeholder:'es. 37.0'},
+      {id:'cons',label:'Stato di coscienza',type:'select',options:['Vigile (0pt)','Confuso/soporoso/non responsivo (3pt)']},
+      {id:'o2sup',label:'Ossigeno supplementare',type:'check'},
+    ],
+    calc:(f)=>{
+      const rr=parseInt(f.rr_n)||18;const spo=parseInt(f.spo2)||96;const sbp=parseInt(f.sbp_n)||120;const hr=parseInt(f.hr_n)||80;const tmp=parseFloat(f.temp_n)||37;
+      const rrs=rr<=8?3:rr<=11?1:rr<=20?0:rr<=24?2:3;
+      const spos=spo<=91?3:spo<=93?2:spo<=95?1:0;
+      const sbps=sbp<=90?3:sbp<=100?2:sbp<=110?1:sbp<=219?0:3;
+      const hrs=hr<=40?3:hr<=50?1:hr<=90?0:hr<=110?1:hr<=130?2:3;
+      const tmps=tmp<=35?3:tmp<=36?1:tmp<=38?0:tmp<=39?1:2;
+      const cons=parseInt((f.cons||'0').charAt(0))||0;
+      const o2=f.o2sup?2:0;
+      const s=rrs+spos+sbps+hrs+tmps+cons+o2;
+      const risk=s<=4?'Basso':s<=6?'Medio (rivalutazione frequente)':'Alto (allerta team)';
+      return `NEWS2: <strong>${s}</strong><br>Rischio deterioramento: ${risk}`;
+    }
+  },
+  // ── FARMACO
+  {id:'dosi_pz',cat:'farmaco',icon:'💊',name:'Dosaggio per peso',desc:'Calcola la dose di un farmaco in base al peso',
+    fields:[
+      {id:'dose_mgkg',label:'Dose (mg/kg)',type:'number',placeholder:'es. 10'},
+      {id:'peso_f',label:'Peso paziente (kg)',type:'number',placeholder:'es. 70'},
+      {id:'freq',label:'N° somministrazioni/die',type:'number',placeholder:'es. 3'},
+    ],
+    calc:(f)=>{ const d=parseFloat(f.dose_mgkg)||0;const p=parseFloat(f.peso_f)||70;const n=parseInt(f.freq)||1;const singola=d*p;const die=singola*n; return `Dose singola: <strong>${singola.toFixed(1)} mg</strong><br>Dose giornaliera: <strong>${die.toFixed(1)} mg</strong>`; }
+  },
+  {id:'warfarin_inr',cat:'farmaco',icon:'🩺',name:'INR Target Warfarin',desc:'Guida alla gestione dell'INR',
+    fields:[
+      {id:'inr_val',label:'INR attuale',type:'number',placeholder:'es. 2.8'},
+      {id:'inr_target',label:'Target INR',type:'select',options:['2.0-3.0 (FA, TVP/EP)','2.5-3.5 (valvole meccaniche)']},
+    ],
+    calc:(f)=>{ const inr=parseFloat(f.inr_val)||2;const target=f.inr_target||'';const t_min=target.includes('2.5')?2.5:2.0;const t_max=target.includes('2.5')?3.5:3.0;let azione;if(inr<t_min-0.5)azione='INR troppo basso: aumentare dose ~15-20%';else if(inr<t_min)azione='INR sotto target: aumentare dose ~5-10%';else if(inr<=t_max)azione='INR in range target ✅';else if(inr<=t_max+0.5)azione='INR leggermente alto: ridurre dose ~5-10%';else if(inr<=5)azione='INR alto: sospendere 1-2 dosi, poi ridurre';else azione='INR pericolosamente alto: sospendere, valutare vitamina K';return `INR: <strong>${inr}</strong> (target ${t_min}-${t_max})<br>${azione}`; }
+  },
+  {id:'creatcl_dosing',cat:'farmaco',icon:'🫘',name:'Adattamento dose renale',desc:'Guida alla riduzione dose in insufficienza renale',
+    fields:[
+      {id:'gfr_d',label:'eGFR (mL/min/1.73m²)',type:'number',placeholder:'es. 45'},
+    ],
+    calc:(f)=>{ const g=parseInt(f.gfr_d)||60;const stage=g>=90?'G1 - dose standard':g>=60?'G2 - dose standard (monitorare)':g>=45?'G3a - riduzione 25-50% per farmaci nefrotossici':g>=30?'G3b - riduzione 50% per molti farmaci, evitare FANS/metformina':g>=15?'G4 - riduzione 75%, nefrologo obbligatorio':'G5 - dialisi, dose post-dialitica'; return `eGFR: <strong>${g} mL/min</strong><br>${stage}`; }
+  },
+  // ── MORE GENERAL
+  {id:'psoriasis_pasi',cat:'general',icon:'🖐️',name:'Anion Gap Plasmatico',desc:'Valutazione acidosi metabolica',
+    fields:[
+      {id:'na_ag',label:'Sodio (mEq/L)',type:'number',placeholder:'es. 140'},
+      {id:'cl_ag',label:'Cloro (mEq/L)',type:'number',placeholder:'es. 104'},
+      {id:'hco3_ag',label:'Bicarbonato (mEq/L)',type:'number',placeholder:'es. 24'},
+      {id:'alb_ag',label:'Albumina (g/dL)',type:'number',placeholder:'es. 4.0'},
+    ],
+    calc:(f)=>{ const na=parseFloat(f.na_ag)||140;const cl=parseFloat(f.cl_ag)||104;const hco3=parseFloat(f.hco3_ag)||24;const alb=parseFloat(f.alb_ag)||4;const ag=na-cl-hco3;const ag_corr=ag+2.5*(4-alb);const int2=ag_corr<=12?'Normale (acidosi ipercloremica)':ag_corr<=20?'Lievemente aumentato':ag_corr<=30?'Aumentato (acidosi metabolica AG+)':'Molto aumentato (chetoacidosi, lattacidosi, intossicazione)'; return `AG: <strong>${ag} mEq/L</strong> · AG corretto: <strong>${ag_corr.toFixed(1)}</strong><br>${int2}`; }
+  },
+  {id:'corrna',cat:'nefro',icon:'🧂',name:'Sodio corretto per glicemia',desc:'Correzione sodiemia in iperglicemia',
+    fields:[
+      {id:'na_c',label:'Sodio misurato (mEq/L)',type:'number',placeholder:'es. 130'},
+      {id:'gly',label:'Glicemia (mg/dL)',type:'number',placeholder:'es. 400'},
+    ],
+    calc:(f)=>{ const na=parseFloat(f.na_c)||130;const gly=parseFloat(f.gly)||100;const corr=na+0.016*(gly-100);return `Sodio corretto: <strong>${corr.toFixed(1)} mEq/L</strong><br>${corr<136?'Iponatriemia vera':corr<=145?'Nella norma':'Ipernatriemia vera'}`; }
+  },
+  {id:'steato',cat:'epato',icon:'🔢',name:'FIB-4 Index',desc:'Steatosi/fibrosi epatica non invasiva',
+    fields:[
+      {id:'age_f4',label:'Età (anni)',type:'number',placeholder:'es. 50'},
+      {id:'ast_f4',label:'AST (U/L)',type:'number',placeholder:'es. 40'},
+      {id:'alt_f4',label:'ALT (U/L)',type:'number',placeholder:'es. 35'},
+      {id:'plt_f4',label:'Piastrine (×10³/μL)',type:'number',placeholder:'es. 200'},
+    ],
+    calc:(f)=>{ const age=parseInt(f.age_f4)||50;const ast=parseFloat(f.ast_f4)||40;const alt=parseFloat(f.alt_f4)||35;const plt=parseFloat(f.plt_f4)||200;const fib4=(age*ast)/(plt*Math.sqrt(alt));const int2=fib4<1.30?'Basso rischio fibrosi (F0-F1)':fib4<=2.67?'Zona indeterminata (eseguire elastografia)':'Alto rischio fibrosi avanzata (F3-F4)'; return `FIB-4: <strong>${fib4.toFixed(2)}</strong><br>${int2}`; }
+  },
+  {id:'framingham',cat:'cardio',icon:'📊',name:'Rischio Cardiovascolare (SCORE2)',desc:'Rischio CV a 10 anni (semplificato)',
+    fields:[
+      {id:'age_fr',label:'Età (anni)',type:'number',placeholder:'es. 55'},
+      {id:'sex_fr',label:'Sesso',type:'select',options:['Maschile','Femminile']},
+      {id:'smoke_fr',label:'Fumatore attuale',type:'check'},
+      {id:'sbp_fr',label:'PAS (mmHg)',type:'number',placeholder:'es. 140'},
+      {id:'chol_fr',label:'Colesterolo totale (mmol/L)',type:'number',placeholder:'es. 5.5'},
+    ],
+    calc:(f)=>{ const age=parseInt(f.age_fr)||55;const fem=(f.sex_fr||'').includes('emmin');const smoke=!!f.smoke_fr;const sbp=parseInt(f.sbp_fr)||130;const chol=parseFloat(f.chol_fr)||5;let risk=((age-40)*0.1)+(smoke?2:0)+((sbp-120)*0.02)+((chol-4)*0.5)+(fem?-1:0);risk=Math.max(0,Math.min(30,risk));const cat=risk<5?'Basso (<5%)':risk<10?'Moderato (5-10%)':risk<20?'Alto (10-20%)':'Molto alto (>20%)'; return `Rischio CV 10 anni stimato: <strong>${risk.toFixed(0)}%</strong><br>Categoria: ${cat}`; }
+  },
+];
+
+let currentCalcCat = 'all';
+function filterCalc(cat){
+  currentCalcCat=cat;
+  document.querySelectorAll('.calc-cat-btn').forEach(b=>{
+    const isActive = b.getAttribute('onclick')===`filterCalc('${cat}')`;
+    b.style.background=isActive?'var(--blue)':'var(--surface)';
+    b.style.color=isActive?'#fff':'var(--text2)';
+  });
+  renderCalcList();
+}
+
+function renderCalcList(){
+  const list=document.getElementById('calcList');if(!list)return;list.innerHTML='';
+  const filtered=CALCS.filter(c=>currentCalcCat==='all'||c.cat===currentCalcCat);
+  if(!filtered.length){list.innerHTML='<p style="text-align:center;padding:32px;color:var(--muted)">Nessun calcolatore</p>';return;}
+  const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px';
+  filtered.forEach(c=>{
+    const card=document.createElement('div');card.className='card';card.style.padding='14px';card.style.cursor='pointer';card.setAttribute('role','button');
+    card.innerHTML=`<div style="font-size:24px;margin-bottom:6px">${c.icon}</div><div style="font-size:14px;font-weight:600;margin-bottom:3px">${c.name}</div><div style="font-size:12px;color:var(--muted);line-height:1.4">${c.desc}</div>`;
+    card.onclick=()=>openCalc(c.id);grid.appendChild(card);
+  });
+  list.appendChild(grid);
+}
+
+function openCalc(id){
+  const c=CALCS.find(x=>x.id===id);if(!c)return;
+  const sheet=document.getElementById('calcSheetBody');
+  let fieldsHtml=c.fields.map(f=>{
+    if(f.type==='check') return `<label style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:.5px solid var(--border2);font-size:15px;cursor:pointer"><input type="checkbox" id="cf_${f.id}" style="width:20px;height:20px;accent-color:var(--blue)"/> ${f.label}</label>`;
+    if(f.type==='number') return `<div class="form-group"><label class="form-label">${f.label}</label><input class="form-input" type="number" id="cf_${f.id}" placeholder="${f.placeholder||''}"/></div>`;
+    if(f.type==='select') return `<div class="form-group"><label class="form-label">${f.label}</label><select class="form-input" id="cf_${f.id}">${(f.options||[]).map(o=>`<option value="${o}">${o}</option>`).join('')}</select></div>`;
+    return '';
+  }).join('');
+  sheet.innerHTML=`<div class="sheet-handle"></div><div style="font-size:22px;margin-bottom:4px">${c.icon} <span style="font-size:18px;font-weight:700">${c.name}</span></div><p style="font-size:14px;color:var(--muted);margin-bottom:16px">${c.desc}</p><div id="calcFields">${fieldsHtml}</div><button class="btn btn-primary btn-full" onclick="runCalc('${id}')" style="margin-top:14px;border-radius:var(--r-md)">Calcola</button><div id="calcResult" style="margin-top:14px;padding:14px;background:var(--blue-light);border-radius:var(--r-md);display:none;font-size:15px;line-height:1.6"></div><div style="padding-top:14px;border-top:.5px solid var(--border2);margin-top:14px"><button class="btn btn-ghost btn-full" onclick="closeSheet('calcSheet')" style="border-radius:var(--r-md)">Chiudi</button></div>`;
+  document.getElementById('calcSheet').removeAttribute('hidden');document.body.style.overflow='hidden';
+}
+
+function runCalc(id){
+  const c=CALCS.find(x=>x.id===id);if(!c)return;
+  const vals={};
+  c.fields.forEach(f=>{const el=document.getElementById('cf_'+f.id);if(!el)return;if(f.type==='check')vals[f.id]=el.checked;else vals[f.id]=el.value;});
+  try{
+    const result=c.calc(vals);
+    const res=document.getElementById('calcResult');res.style.display='block';res.innerHTML=result;
+  }catch(e){document.getElementById('calcResult').style.display='block';document.getElementById('calcResult').textContent='Errore nel calcolo: controlla i valori inseriti';}
+}
+
+// ══ SHOW TAB UPDATED ══
+const _origShowTab = window.showTab || function(){};
+window.showTab = function(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+  const page=document.getElementById('page-'+name);if(page)page.classList.add('active');
+  const tab=document.getElementById('tab-'+name);if(tab)tab.classList.add('active');
+  if(name==='studio')renderStudy();
+  if(name==='scadenze')renderDeadlines();
+  if(name==='struttura')populateStruttura();
+  if(name==='calc')renderCalcList();
+};
 </script>
 </body>
 </html>
