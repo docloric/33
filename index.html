@@ -497,195 +497,267 @@ datalist { background: var(--surface); color: var(--text); }
     <div class="ob-sub">Il diario digitale dello specializzando</div>
   </div>
   <div class="ob-body">
-    <div class="ob-section">
-      <h2>Chi sei?</h2>
+
+    <!-- STEP 1: Tipo di corso -->
+    <div class="ob-section" id="ob-step1">
+      <h2>Che percorso stai facendo?</h2>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+        <button class="btn btn-ghost btn-full" id="btn-spec" onclick="selectCourseType('spec')"
+          style="border-radius:var(--r-lg);padding:16px;font-size:16px;justify-content:flex-start;gap:12px;border:.5px solid var(--border)">
+          🏥 <span><strong>Scuola di Specializzazione</strong><br><small style="color:var(--muted);font-weight:400">Specialità medica universitaria (3-5 anni)</small></span>
+        </button>
+        <button class="btn btn-ghost btn-full" id="btn-mmg" onclick="selectCourseType('mmg')"
+          style="border-radius:var(--r-lg);padding:16px;font-size:16px;justify-content:flex-start;gap:12px;border:.5px solid var(--border)">
+          🩺 <span><strong>Corso di Formazione Specifica MMG</strong><br><small style="color:var(--muted);font-weight:400">Medicina Generale regionale (3 anni)</small></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2a: Specializzazione -->
+    <div class="ob-section" id="ob-step2-spec" style="display:none">
+      <h2>Scuola di Specializzazione</h2>
       <div class="form-group">
-        <label class="form-label">Nome e Cognome</label>
-        <input class="form-input" id="ob-name" type="text" placeholder="Dr. Mario Rossi" autocomplete="name"/>
+        <label class="form-label">Specializzazione</label>
+        <select class="form-input" id="ob-school-sel" onchange="onSchoolSelect()">
+          <option value="">Seleziona la tua specializzazione…</option>
+          <option value="Allergologia ed Immunologia Clinica">Allergologia ed Immunologia Clinica</option>
+          <option value="Anatomia Patologica">Anatomia Patologica</option>
+          <option value="Anestesia, Rianimazione, Terapia Intensiva e del Dolore">Anestesia, Rianimazione, Terapia Intensiva e del Dolore</option>
+          <option value="Biochimica Clinica">Biochimica Clinica</option>
+          <option value="Cardiochirurgia">Cardiochirurgia</option>
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Chirurgia Generale">Chirurgia Generale</option>
+          <option value="Chirurgia Maxillo-Facciale">Chirurgia Maxillo-Facciale</option>
+          <option value="Chirurgia Pediatrica">Chirurgia Pediatrica</option>
+          <option value="Chirurgia Plastica, Ricostruttiva ed Estetica">Chirurgia Plastica, Ricostruttiva ed Estetica</option>
+          <option value="Chirurgia Toracica">Chirurgia Toracica</option>
+          <option value="Chirurgia Vascolare">Chirurgia Vascolare</option>
+          <option value="Corso di Formazione Specifica in Medicina Generale (CFSMG)">Corso di Formazione Specifica in Medicina Generale (CFSMG)</option>
+          <option value="Dermatologia e Venerologia">Dermatologia e Venerologia</option>
+          <option value="Ematologia">Ematologia</option>
+          <option value="Endocrinologia e Malattie del Metabolismo">Endocrinologia e Malattie del Metabolismo</option>
+          <option value="Farmacologia e Tossicologia Clinica">Farmacologia e Tossicologia Clinica</option>
+          <option value="Gastroenterologia">Gastroenterologia</option>
+          <option value="Genetica Medica">Genetica Medica</option>
+          <option value="Geriatria">Geriatria</option>
+          <option value="Ginecologia e Ostetricia">Ginecologia e Ostetricia</option>
+          <option value="Igiene e Medicina Preventiva">Igiene e Medicina Preventiva</option>
+          <option value="Malattie Infettive e Tropicali">Malattie Infettive e Tropicali</option>
+          <option value="Malattie dell'Apparato Respiratorio">Malattie dell'Apparato Respiratorio</option>
+          <option value="Medicina Fisica e Riabilitativa">Medicina Fisica e Riabilitativa</option>
+          <option value="Medicina Interna">Medicina Interna</option>
+          <option value="Medicina Legale">Medicina Legale</option>
+          <option value="Medicina Nucleare">Medicina Nucleare</option>
+          <option value="Medicina Sportiva">Medicina Sportiva</option>
+          <option value="Medicina d'Emergenza-Urgenza">Medicina d'Emergenza-Urgenza</option>
+          <option value="Medicina del Lavoro">Medicina del Lavoro</option>
+          <option value="Microbiologia e Virologia">Microbiologia e Virologia</option>
+          <option value="Nefrologia">Nefrologia</option>
+          <option value="Neurochirurgia">Neurochirurgia</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Neuropsichiatria Infantile">Neuropsichiatria Infantile</option>
+          <option value="Oftalmologia">Oftalmologia</option>
+          <option value="Oncologia Medica">Oncologia Medica</option>
+          <option value="Ortopedia e Traumatologia">Ortopedia e Traumatologia</option>
+          <option value="Otorinolaringoiatria">Otorinolaringoiatria</option>
+          <option value="Patologia Clinica e Biochimica Clinica">Patologia Clinica e Biochimica Clinica</option>
+          <option value="Pediatria">Pediatria</option>
+          <option value="Psichiatria">Psichiatria</option>
+          <option value="Radiodiagnostica">Radiodiagnostica</option>
+          <option value="Radioterapia">Radioterapia</option>
+          <option value="Reumatologia">Reumatologia</option>
+          <option value="Scienza dell'Alimentazione e Dietetica">Scienza dell'Alimentazione e Dietetica</option>
+          <option value="Urologia">Urologia</option>
+        </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Scuola di Specializzazione</label>
-        <input class="form-input" id="ob-school" type="text" oninput="onSchoolChange()" onchange="onSchoolChange()" placeholder="es. Medicina del Lavoro" autocomplete="off" list="school-list"/>
-        <datalist id="school-list">
-          <option value="Allergologia ed Immunologia Clinica"/>
-          <option value="Anatomia Patologica"/>
-          <option value="Anestesia, Rianimazione, Terapia Intensiva e del Dolore"/>
-          <option value="Biochimica Clinica"/>
-          <option value="Cardiochirurgia"/>
-          <option value="Cardiologia"/>
-          <option value="Chirurgia Generale"/>
-          <option value="Chirurgia Maxillo-Facciale"/>
-          <option value="Chirurgia Pediatrica"/>
-          <option value="Chirurgia Plastica, Ricostruttiva ed Estetica"/>
-          <option value="Chirurgia Toracica"/>
-          <option value="Chirurgia Vascolare"/>
-          <option value="Dermatologia e Venerologia"/>
-          <option value="Ematologia"/>
-          <option value="Endocrinologia e Malattie del Metabolismo"/>
-          <option value="Farmacologia e Tossicologia Clinica"/>
-          <option value="Gastroenterologia"/>
-          <option value="Genetica Medica"/>
-          <option value="Geriatria"/>
-          <option value="Ginecologia e Ostetricia"/>
-          <option value="Igiene e Medicina Preventiva"/>
-          <option value="Malattie dell'Apparato Respiratorio"/>
-          <option value="Malattie Infettive e Tropicali"/>
-          <option value="Medicina del Lavoro"/>
-          <option value="Medicina d'Emergenza-Urgenza"/>
-          <option value="Medicina Fisica e Riabilitativa"/>
-          <option value="Medicina Interna"/>
-          <option value="Medicina Legale"/>
-          <option value="Medicina Nucleare"/>
-          <option value="Medicina Sportiva"/>
-          <option value="Microbiologia e Virologia"/>
-          <option value="Nefrologia"/>
-          <option value="Neurochirurgia"/>
-          <option value="Neurologia"/>
-          <option value="Neuropsichiatria Infantile"/>
-          <option value="Neuropsicologia"/>
-          <option value="Neuroscience"/>
-          <option value="Oftalmologia"/>
-          <option value="Oncologia Medica"/>
-          <option value="Ortopedia e Traumatologia"/>
-          <option value="Otorinolaringoiatria"/>
-          <option value="Patologia Clinica e Biochimica Clinica"/>
-          <option value="Pediatria"/>
-          <option value="Psichiatria"/>
-          <option value="Psicologia Clinica"/>
-          <option value="Radiodiagnostica"/>
-          <option value="Radioterapia"/>
-          <option value="Reumatologia"/>
-          <option value="Scienza dell'Alimentazione e Dietetica"/>
-          <option value="Urologia"/>
-          <option value="Corso di Formazione Specifica in Medicina Generale (CFSMG)"/>
-        </datalist>
-      </div>
-      <div class="form-group" id="ob-uni-group">
         <label class="form-label">Università</label>
-        <input class="form-input" id="ob-uni" type="text" placeholder="Inizia a digitare l'università…" autocomplete="off" list="uni-list" oninput="onUniInput()"/>
-        <datalist id="uni-list">
-          <option value="Università degli Studi di Bari Aldo Moro"/>
-          <option value="Università degli Studi di Bologna"/>
-          <option value="Università degli Studi di Brescia"/>
-          <option value="Università degli Studi di Cagliari"/>
-          <option value="Università degli Studi della Campania Luigi Vanvitelli"/>
-          <option value="Università degli Studi di Catania"/>
-          <option value="Università degli Studi di Chieti-Pescara G. d'Annunzio"/>
-          <option value="Università degli Studi di Ferrara"/>
-          <option value="Università degli Studi di Firenze"/>
-          <option value="Università degli Studi di Foggia"/>
-          <option value="Università degli Studi di Genova"/>
-          <option value="Università degli Studi dell'Insubria"/>
-          <option value="Università degli Studi dell'Aquila"/>
-          <option value="Università degli Studi di Messina"/>
-          <option value="Università degli Studi di Milano"/>
-          <option value="Università degli Studi di Milano-Bicocca"/>
-          <option value="Università degli Studi di Modena e Reggio Emilia"/>
-          <option value="Università degli Studi di Napoli Federico II"/>
-          <option value="Università degli Studi di Padova"/>
-          <option value="Università degli Studi di Palermo"/>
-          <option value="Università degli Studi di Parma"/>
-          <option value="Università degli Studi di Pavia"/>
-          <option value="Università degli Studi di Perugia"/>
-          <option value="Università degli Studi di Pisa"/>
-          <option value="Università degli Studi di Roma La Sapienza"/>
-          <option value="Università degli Studi di Roma Tor Vergata"/>
-          <option value="Università degli Studi di Roma Tre"/>
-          <option value="Università Campus Bio-Medico di Roma"/>
-          <option value="Università Cattolica del Sacro Cuore (Roma)"/>
-          <option value="Università degli Studi di Salerno"/>
-          <option value="Università degli Studi di Sassari"/>
-          <option value="Università degli Studi di Siena"/>
-          <option value="Università degli Studi di Torino"/>
-          <option value="Università degli Studi di Trieste"/>
-          <option value="Università degli Studi di Udine"/>
-          <option value="Università degli Studi di Venezia Ca' Foscari"/>
-          <option value="Università degli Studi di Verona"/>
-          <option value="Università Vita-Salute San Raffaele (Milano)"/>
-          <option value="Università degli Studi Magna Graecia di Catanzaro"/>
-          <option value="Università degli Studi di Reggio Calabria"/>
-          <option value="Università degli Studi del Piemonte Orientale"/>
-          <option value="Università degli Studi di Napoli Parthenope"/>
-          <option value="Università degli Studi Suor Orsola Benincasa"/>
-          <option value="Università LUM Giuseppe Degennaro"/>
-          <option value="Università degli Studi di Cassino"/>
-          <option value="Università degli Studi Internazionali di Roma (UNINT)"/>
-        </datalist>
-      </div>
-      <div class="form-group" id="ob-region-group" style="display:none">
-        <label class="form-label">Regione CFSMG</label>
-        <select class="form-input" id="ob-region">
-          <option value="">Seleziona regione…</option>
-              <option value="Abruzzo">Abruzzo</option>
-              <option value="Basilicata">Basilicata</option>
-              <option value="Calabria">Calabria</option>
-              <option value="Campania">Campania</option>
-              <option value="Emilia-Romagna">Emilia-Romagna</option>
-              <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
-              <option value="Lazio">Lazio</option>
-              <option value="Liguria">Liguria</option>
-              <option value="Lombardia">Lombardia</option>
-              <option value="Marche">Marche</option>
-              <option value="Molise">Molise</option>
-              <option value="Piemonte">Piemonte</option>
-              <option value="Puglia">Puglia</option>
-              <option value="Sardegna">Sardegna</option>
-              <option value="Sicilia">Sicilia</option>
-              <option value="Toscana">Toscana</option>
-              <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
-              <option value="Umbria">Umbria</option>
-              <option value="Valle d'Aosta">Valle d'Aosta</option>
-              <option value="Veneto">Veneto</option>
+        <select class="form-input" id="ob-uni-sel">
+          <option value="">Seleziona l'università…</option>
+          <option value="Università degli Studi di Bari Aldo Moro">Università degli Studi di Bari Aldo Moro</option>
+          <option value="Università degli Studi di Bologna">Università degli Studi di Bologna</option>
+          <option value="Università degli Studi di Brescia">Università degli Studi di Brescia</option>
+          <option value="Università degli Studi di Cagliari">Università degli Studi di Cagliari</option>
+          <option value="Università degli Studi della Campania Luigi Vanvitelli">Università degli Studi della Campania Luigi Vanvitelli</option>
+          <option value="Università degli Studi di Catania">Università degli Studi di Catania</option>
+          <option value="Università degli Studi di Chieti-Pescara G. d'Annunzio">Università degli Studi di Chieti-Pescara G. d'Annunzio</option>
+          <option value="Università degli Studi di Ferrara">Università degli Studi di Ferrara</option>
+          <option value="Università degli Studi di Firenze">Università degli Studi di Firenze</option>
+          <option value="Università degli Studi di Foggia">Università degli Studi di Foggia</option>
+          <option value="Università degli Studi di Genova">Università degli Studi di Genova</option>
+          <option value="Università degli Studi dell'Insubria">Università degli Studi dell'Insubria</option>
+          <option value="Università degli Studi dell'Aquila">Università degli Studi dell'Aquila</option>
+          <option value="Università degli Studi di Messina">Università degli Studi di Messina</option>
+          <option value="Università degli Studi di Milano (Statale)">Università degli Studi di Milano (Statale)</option>
+          <option value="Università degli Studi di Milano-Bicocca">Università degli Studi di Milano-Bicocca</option>
+          <option value="Università degli Studi di Modena e Reggio Emilia">Università degli Studi di Modena e Reggio Emilia</option>
+          <option value="Università degli Studi di Napoli Federico II">Università degli Studi di Napoli Federico II</option>
+          <option value="Università degli Studi di Padova">Università degli Studi di Padova</option>
+          <option value="Università degli Studi di Palermo">Università degli Studi di Palermo</option>
+          <option value="Università degli Studi di Parma">Università degli Studi di Parma</option>
+          <option value="Università degli Studi di Pavia">Università degli Studi di Pavia</option>
+          <option value="Università degli Studi di Perugia">Università degli Studi di Perugia</option>
+          <option value="Università degli Studi di Pisa">Università degli Studi di Pisa</option>
+          <option value="Università degli Studi di Roma La Sapienza">Università degli Studi di Roma La Sapienza</option>
+          <option value="Università degli Studi di Roma Tor Vergata">Università degli Studi di Roma Tor Vergata</option>
+          <option value="Università Campus Bio-Medico di Roma">Università Campus Bio-Medico di Roma</option>
+          <option value="Università Cattolica del Sacro Cuore (Roma)">Università Cattolica del Sacro Cuore (Roma)</option>
+          <option value="Università degli Studi di Salerno">Università degli Studi di Salerno</option>
+          <option value="Università degli Studi di Sassari">Università degli Studi di Sassari</option>
+          <option value="Università degli Studi di Siena">Università degli Studi di Siena</option>
+          <option value="Università degli Studi di Torino">Università degli Studi di Torino</option>
+          <option value="Università degli Studi di Trieste">Università degli Studi di Trieste</option>
+          <option value="Università degli Studi di Udine">Università degli Studi di Udine</option>
+          <option value="Università degli Studi di Verona">Università degli Studi di Verona</option>
+          <option value="Università Vita-Salute San Raffaele (Milano)">Università Vita-Salute San Raffaele (Milano)</option>
+          <option value="Università degli Studi Magna Graecia di Catanzaro">Università degli Studi Magna Graecia di Catanzaro</option>
+          <option value="Università degli Studi del Piemonte Orientale">Università degli Studi del Piemonte Orientale</option>
         </select>
       </div>
     </div>
-    <div class="ob-section">
-      <h2>Il tuo corso</h2>
+
+    <!-- STEP 2b: MMG -->
+    <div class="ob-section" id="ob-step2-mmg" style="display:none">
+      <h2>Corso di Formazione Specifica MMG</h2>
+      <div class="form-group">
+        <label class="form-label">Regione</label>
+        <select class="form-input" id="ob-region-sel">
+          <option value="">Seleziona la regione…</option>
+          <option value="Abruzzo">Abruzzo</option>
+          <option value="Basilicata">Basilicata</option>
+          <option value="Calabria">Calabria</option>
+          <option value="Campania">Campania</option>
+          <option value="Emilia-Romagna">Emilia-Romagna</option>
+          <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+          <option value="Lazio">Lazio</option>
+          <option value="Liguria">Liguria</option>
+          <option value="Lombardia">Lombardia</option>
+          <option value="Marche">Marche</option>
+          <option value="Molise">Molise</option>
+          <option value="Piemonte">Piemonte</option>
+          <option value="Puglia">Puglia</option>
+          <option value="Sardegna">Sardegna</option>
+          <option value="Sicilia">Sicilia</option>
+          <option value="Toscana">Toscana</option>
+          <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+          <option value="Umbria">Umbria</option>
+          <option value="Valle d'Aosta">Valle d'Aosta</option>
+          <option value="Veneto">Veneto</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- STEP 3: Dati personali (appare dopo scelta corso) -->
+    <div class="ob-section" id="ob-step3" style="display:none">
+      <h2>I tuoi dati</h2>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Anno attuale</label>
-          <select class="form-input" id="ob-year">
-            <option value="1">Anno I</option><option value="2">Anno II</option>
-            <option value="3">Anno III</option><option value="4">Anno IV</option>
-            <option value="5">Anno V</option>
-          </select>
+          <label class="form-label">Nome</label>
+          <input class="form-input" id="ob-firstname" type="text" placeholder="Mario" autocomplete="given-name"/>
         </div>
         <div class="form-group">
-          <label class="form-label">Durata corso</label>
-          <select class="form-input" id="ob-dur">
-            <option value="3">3 anni</option><option value="4" selected>4 anni</option>
-            <option value="5">5 anni</option>
-          </select>
+          <label class="form-label">Cognome</label>
+          <input class="form-input" id="ob-lastname" type="text" placeholder="Rossi" autocomplete="family-name"/>
         </div>
       </div>
+
+      <div class="form-group">
+        <label class="form-label">Anno di corso attuale</label>
+        <select class="form-input" id="ob-year">
+          <option value="1">Anno I</option>
+          <option value="2">Anno II</option>
+          <option value="3">Anno III</option>
+          <option value="4">Anno IV</option>
+          <option value="5">Anno V</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Durata corso</label>
+        <select class="form-input" id="ob-dur">
+          <option value="3">3 anni</option>
+          <option value="4" selected>4 anni</option>
+          <option value="5">5 anni</option>
+        </select>
+      </div>
+
       <div class="form-group">
         <label class="form-label">Inizio specializzazione</label>
         <div style="display:flex;gap:8px">
           <select class="form-input" id="ob-start-day" style="flex:1">
-            <option value="">Giorno</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+            <option value="01">Giorno</option>
+<option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
           </select>
           <select class="form-input" id="ob-start-month" style="flex:1.5">
-            <option value="">Mese</option>
-            <option value="01">Gennaio</option><option value="02">Febbraio</option><option value="03">Marzo</option>
-            <option value="04">Aprile</option><option value="05">Maggio</option><option value="06">Giugno</option>
-            <option value="07">Luglio</option><option value="08">Agosto</option><option value="09">Settembre</option>
-            <option value="10" selected>Ottobre</option><option value="11">Novembre</option><option value="12">Dicembre</option>
+            <option value="01">Gennaio</option><option value="02">Febbraio</option>
+            <option value="03">Marzo</option><option value="04">Aprile</option>
+            <option value="05">Maggio</option><option value="06">Giugno</option>
+            <option value="07">Luglio</option><option value="08">Agosto</option>
+            <option value="09">Settembre</option><option value="10">Ottobre</option>
+            <option value="11" selected>Novembre</option><option value="12">Dicembre</option>
           </select>
           <select class="form-input" id="ob-start-year" style="flex:1.2">
-            <option value="">Anno</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024"selected>2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024"selected>2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
           </select>
         </div>
       </div>
+
       <div class="form-group">
         <label class="form-label">Ore mensili richieste</label>
         <input class="form-input" id="ob-hours" type="number" value="152" min="1" max="300"/>
         <div class="form-hint">Ore lavorative previste ogni mese dal contratto</div>
       </div>
+
+      <button class="btn btn-primary btn-full" id="ob-submit"
+        style="font-size:17px;padding:16px;border-radius:var(--r-lg);margin-bottom:8px"
+        onclick="saveOnboarding()">Inizia →</button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:40px">
+        I dati restano solo sul tuo dispositivo
+      </p>
     </div>
-    <button class="btn btn-primary btn-full" onclick="saveOnboarding()" style="font-size:17px;padding:16px;border-radius:var(--r-lg);margin-bottom:32px">
-      Inizia →
-    </button>
-    <p style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:40px">I dati restano sul tuo dispositivo · Privacy by design</p>
+
   </div>
 </div>
 
@@ -1083,7 +1155,10 @@ datalist { background: var(--surface); color: var(--text); }
       <div class="set-label">Dati personali</div>
       <div class="group-list">
         <div style="padding:12px 16px">
-          <div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="set-name" type="text" autocomplete="name"/></div>
+          <div style="display:flex;gap:10px">
+          <div class="form-group" style="flex:1"><label class="form-label">Nome</label><input class="form-input" id="set-firstname" type="text" autocomplete="given-name"/></div>
+          <div class="form-group" style="flex:1"><label class="form-label">Cognome</label><input class="form-input" id="set-lastname" type="text" autocomplete="family-name"/></div>
+        </div>
           <div class="form-group"><label class="form-label">Scuola di Specializzazione</label><input class="form-input" id="set-school" type="text" list="school-list2"/><datalist id="school-list2">
           <option value="Allergologia ed Immunologia Clinica"/>
           <option value="Anatomia Patologica"/>
@@ -1427,8 +1502,22 @@ async function allOreKeys(){const a=[];try{for(let i=0;i<localStorage.length;i++
 async function loadStore(k){try{const r=ls(k);if(r)return JSON.parse(r);}catch(_){}return await idbGet(k)||null;}
 async function saveStore(k,v){try{ls(k,JSON.stringify(v));}catch(_){}await idbSet(k,v);}
 
-async function loadCFG(){const v=await loadStore('app33_cfg');if(v)CFG={...CFG,...v};}
-async function saveCFG(){await saveStore('app33_cfg',CFG);}
+async function loadCFG(){
+  // Try localStorage first (Safari-safe, synchronous)
+  try {
+    const raw = localStorage.getItem('app33_cfg');
+    if (raw) { const v = JSON.parse(raw); CFG = {...CFG, ...v}; return; }
+  } catch(_) {}
+  // Fallback to IndexedDB
+  const v = await idbGet('app33_cfg');
+  if (v) CFG = {...CFG, ...v};
+}
+async function saveCFG(){
+  // Always save to localStorage synchronously
+  try { localStorage.setItem('app33_cfg', JSON.stringify(CFG)); } catch(_) {}
+  // Also try IndexedDB (non-blocking)
+  idbSet('app33_cfg', CFG).catch(()=>{});
+}
 
 // ════════════════════════════════════════════════════
 // FESTIVITÀ
@@ -1458,9 +1547,15 @@ async function init(){
   // Tema (light fixed per ora, togglable)
   const theme=ls('app33_theme')||'light';
   document.documentElement.setAttribute('data-theme',theme);
-  // Onboarding
-  if(!CFG.name&&!CFG.school){document.getElementById('onboarding').removeAttribute('hidden');return;}
-  document.getElementById('onboarding').hidden=true;
+  // Onboarding — check if user has already set up the app
+  const hasProfile = CFG.name || CFG.firstname;
+  if (!hasProfile) {
+    document.getElementById('onboarding').removeAttribute('hidden');
+    document.getElementById('onboarding').style.display = '';
+    return;
+  }
+  document.getElementById('onboarding').hidden = true;
+  document.getElementById('onboarding').style.display = 'none';
   populateProfile();
   buildYearPanels();
   await renderAll();
@@ -1474,47 +1569,127 @@ async function init(){
 // ════════════════════════════════════════════════════
 // ONBOARDING
 // ════════════════════════════════════════════════════
-async function saveOnboarding(){
+// ════════════════════════════════════════════════════
+// ONBOARDING FLOW
+// ════════════════════════════════════════════════════
+let ob_courseType = ''; // 'spec' or 'mmg'
+
+function selectCourseType(type) {
+  ob_courseType = type;
+  // Highlight chosen button
+  document.getElementById('btn-spec').style.borderColor = type==='spec' ? 'var(--blue)' : 'var(--border)';
+  document.getElementById('btn-spec').style.background  = type==='spec' ? 'var(--blue-light)' : '';
+  document.getElementById('btn-mmg').style.borderColor  = type==='mmg'  ? 'var(--blue)' : 'var(--border)';
+  document.getElementById('btn-mmg').style.background   = type==='mmg'  ? 'var(--blue-light)' : '';
+  // Show correct step 2
+  document.getElementById('ob-step2-spec').style.display = type==='spec' ? '' : 'none';
+  document.getElementById('ob-step2-mmg').style.display  = type==='mmg'  ? '' : 'none';
+  // Show step 3
+  document.getElementById('ob-step3').style.display = '';
+  // Auto-set hours and duration for MMG
+  if (type === 'mmg') {
+    document.getElementById('ob-hours').value = '100';
+    document.getElementById('ob-dur').value   = '3';
+  } else {
+    document.getElementById('ob-hours').value = '152';
+  }
+  // Scroll to step 3
+  setTimeout(() => {
+    document.getElementById('ob-step3').scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+}
+
+function onSchoolSelect() {
+  const school = document.getElementById('ob-school-sel').value;
+  if (!school) return;
+  // Auto-fill duration
+  const dur5 = ['Anestesia','Cardiochirurgia','Chirurgia Generale','Chirurgia Maxillo',
+    'Chirurgia Pediatrica','Chirurgia Plastica','Chirurgia Toracica','Chirurgia Vascolare',
+    'Neurochirurgia','Ortopedia','Urologia'];
+  let d = 4;
+  for (const k of dur5) { if (school.includes(k)) { d = 5; break; } }
+  document.getElementById('ob-dur').value = d;
+}
+
+function saveOnboarding() {
   try {
-    const name=document.getElementById('ob-name').value.trim();
-    const school=document.getElementById('ob-school').value.trim();
-    if(!name||!school){alert('Inserisci nome e scuola di specializzazione');return;}
-    // Build start date from three selects
-    const sd=document.getElementById('ob-start-day').value;
-    const sm=document.getElementById('ob-start-month').value;
-    const sy=document.getElementById('ob-start-year').value;
-    const startStr = (sy&&sm) ? `${sy}-${sm}` : '2024-11';
-    const isCFSMG = school.includes('CFSMG') || school.toLowerCase().includes('medicina generale');
-    const region = isCFSMG ? (document.getElementById('ob-region').value||'') : '';
-    const uni = isCFSMG ? (region ? `Regione ${region}` : '') : document.getElementById('ob-uni').value.trim();
-    // Auto-fill duration based on school
-    const schoolDurations = {
-      'Anestesia': 5,'Cardiochirurgia': 5,'Chirurgia Generale': 5,'Chirurgia Maxillo': 5,
-      'Chirurgia Pediatrica': 5,'Chirurgia Plastica': 5,'Chirurgia Toracica': 5,'Chirurgia Vascolare': 5,
-      'Neurochirurgia': 5,'Ortopedia': 5,'Urologia': 5,'CFSMG': 3,'medicina generale': 3
-    };
-    let autoDur = 4;
-    for (const [k,v] of Object.entries(schoolDurations)) {
-      if (school.toLowerCase().includes(k.toLowerCase())) { autoDur = v; break; }
+    const firstname = (document.getElementById('ob-firstname')?.value || '').trim();
+    const lastname  = (document.getElementById('ob-lastname')?.value  || '').trim();
+    if (!firstname || !lastname) {
+      alert('Inserisci nome e cognome');
+      document.getElementById('ob-firstname')?.focus();
+      return;
     }
-    const durEl = document.getElementById('ob-dur');
-    const dur = parseInt(durEl.value) || autoDur;
-    CFG={name, school, uni, region, year:parseInt(document.getElementById('ob-year').value)||1,
-      dur, start:startStr, hours:parseInt(document.getElementById('ob-hours').value)||152,
-      isCFSMG};
-    await saveCFG();
-    document.getElementById('onboarding').hidden=true;
-    populateProfile();
-    buildYearPanels();
-    await renderAll();
-    renderDiary();
-    renderDeadlines();
-    renderStudy();
+    if (!ob_courseType) {
+      alert('Seleziona prima il tipo di corso (Specializzazione o MMG)');
+      document.getElementById('ob-step1').scrollIntoView({behavior:'smooth'});
+      return;
+    }
+    let school = '', uni = '', region = '', isCFSMG = false;
+    if (ob_courseType === 'spec') {
+      school = document.getElementById('ob-school-sel').value;
+      uni    = document.getElementById('ob-uni-sel').value;
+      if (!school) { alert('Seleziona la scuola di specializzazione'); return; }
+      if (!uni)    { alert('Seleziona l'università'); return; }
+    } else {
+      school  = 'Corso di Formazione Specifica in Medicina Generale (CFSMG)';
+      region  = document.getElementById('ob-region-sel').value;
+      uni     = region ? 'Regione ' + region : '';
+      isCFSMG = true;
+      if (!region) { alert('Seleziona la regione'); return; }
+    }
+    // Date
+    const sd = document.getElementById('ob-start-day').value   || '01';
+    const sm = document.getElementById('ob-start-month').value || '11';
+    const sy = document.getElementById('ob-start-year').value  || '2024';
+    const startStr = sy + '-' + sm;
+    // Build config
+    const newCFG = {
+      firstname, lastname,
+      name: firstname + ' ' + lastname,
+      school, uni, region, isCFSMG,
+      year:  parseInt(document.getElementById('ob-year').value)  || 1,
+      dur:   parseInt(document.getElementById('ob-dur').value)   || 4,
+      start: startStr,
+      hours: parseInt(document.getElementById('ob-hours').value) || 152,
+    };
+    // Save synchronously to localStorage FIRST (Safari safe)
+    try {
+      localStorage.setItem('app33_cfg', JSON.stringify(newCFG));
+    } catch(lsErr) {
+      console.warn('localStorage failed:', lsErr);
+    }
+    // Also try IndexedDB async (don't await — don't block)
+    idbSet('app33_cfg', newCFG).catch(()=>{});
+    // Update global CFG
+    CFG = newCFG;
+    // Hide onboarding immediately
+    document.getElementById('onboarding').hidden = true;
+    document.getElementById('onboarding').style.display = 'none';
+    // Boot the app
+    try { populateProfile(); } catch(e) { console.warn(e); }
+    try { buildYearPanels(); } catch(e) { console.warn(e); }
+    renderAll().catch(console.warn);
+    renderDiary().catch ? renderDiary().catch(console.warn) : renderDiary();
+    try { renderDeadlines(); } catch(e) { console.warn(e); }
+    try { renderStudy(); } catch(e) { console.warn(e); }
+    // Make sure page-ore is shown
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+    const pg = document.getElementById('page-ore');
+    const tb = document.getElementById('tab-ore');
+    if (pg) pg.classList.add('active');
+    if (tb) tb.classList.add('active');
   } catch(err) {
     console.error('saveOnboarding error:', err);
-    alert('Errore: ' + err.message);
+    alert('Errore imprevisto: ' + err.message + '\n\nApri la console del browser per i dettagli.');
   }
 }
+
+// ═══ HELPERS for onboarding ═══
+function onSchoolChange() { /* kept for compatibility */ }
+function onUniInput() { /* kept for compatibility */ }
+
 
 // ════════════════════════════════════════════════════
 // NAVIGATION
@@ -1826,8 +2001,35 @@ async function deleteLink(i){const links=await loadLinks();links.splice(i,1);awa
 // ════════════════════════════════════════════════════
 // SETTINGS / PROFILE
 // ════════════════════════════════════════════════════
-function populateProfile(){document.getElementById('set-name').value=CFG.name||'';document.getElementById('set-school').value=CFG.school||'';document.getElementById('set-uni').value=CFG.uni||'';document.getElementById('set-year').value=CFG.year||1;document.getElementById('set-dur').value=CFG.dur||4;document.getElementById('set-start').value=CFG.start||'2024-11';document.getElementById('set-hours').value=CFG.hours||152;}
-async function saveProfile(){CFG.name=document.getElementById('set-name').value.trim();CFG.school=document.getElementById('set-school').value.trim();CFG.uni=document.getElementById('set-uni').value.trim();CFG.year=parseInt(document.getElementById('set-year').value);CFG.dur=parseInt(document.getElementById('set-dur').value);CFG.start=document.getElementById('set-start').value;CFG.hours=parseInt(document.getElementById('set-hours').value)||152;await saveCFG();buildYearPanels();await renderAll();alert('Salvato ✓');}
+function populateProfile(){
+  const fn = document.getElementById('set-firstname');
+  const ln = document.getElementById('set-lastname');
+  if (fn) fn.value = CFG.firstname || (CFG.name ? CFG.name.split(' ')[0] : '');
+  if (ln) ln.value = CFG.lastname  || (CFG.name ? CFG.name.split(' ').slice(1).join(' ') : '');
+  const nm = document.getElementById('set-name'); if(nm) nm.value=CFG.name||'';
+  const sc = document.getElementById('set-school'); if(sc) sc.value=CFG.school||'';
+  const un = document.getElementById('set-uni'); if(un) un.value=CFG.uni||'';
+  const yr = document.getElementById('set-year'); if(yr) yr.value=CFG.year||1;
+  const dr = document.getElementById('set-dur'); if(dr) dr.value=CFG.dur||4;
+  const st = document.getElementById('set-start'); if(st) st.value=CFG.start||'2024-11';
+  const hr = document.getElementById('set-hours'); if(hr) hr.value=CFG.hours||152;
+}
+async function saveProfile(){
+  const fn = (document.getElementById('set-firstname')?.value||'').trim();
+  const ln = (document.getElementById('set-lastname')?.value||'').trim();
+  if (fn) { CFG.firstname = fn; CFG.lastname = ln; CFG.name = (fn+' '+ln).trim(); }
+  else { CFG.name = (document.getElementById('set-name')?.value||'').trim(); }
+  CFG.school = (document.getElementById('set-school')?.value||'').trim();
+  CFG.uni    = (document.getElementById('set-uni')?.value||'').trim();
+  CFG.year   = parseInt(document.getElementById('set-year')?.value)||1;
+  CFG.dur    = parseInt(document.getElementById('set-dur')?.value)||4;
+  CFG.start  = document.getElementById('set-start')?.value || '2024-11';
+  CFG.hours  = parseInt(document.getElementById('set-hours')?.value)||152;
+  await saveCFG();
+  buildYearPanels();
+  await renderAll();
+  alert('Salvato ✓');
+}
 function openSettings(){showTab('profilo');}
 
 // ════════════════════════════════════════════════════
